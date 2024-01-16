@@ -31,10 +31,10 @@ public class ObserverScript : MonoBehaviour {
 
     private void Update() {
         CheckKeyBinds();
-        UpdatePosition();
+        //UpdatePosition();
         UpdateCamera();
 
-        //KeepInOrbit();
+        KeepInOrbit();
     }
 
     private void OnValidate() {

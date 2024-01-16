@@ -19,7 +19,7 @@ namespace PlanetGeneration.Chunks {
         public int Index;
         public int ParentMeshStart;
 
-        public static int Resolution = 254; // Max 255, must be even
+        public static int Resolution = 100; // Max 255, must be even
         public static int ParentIndexIncrement = CeilToInt(Resolution / 2f) + 1;
         public static float HalfResolution = Resolution * 0.5f;
         public static int VertexResolution = Resolution + 1;
