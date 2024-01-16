@@ -2,7 +2,9 @@
 using System;
 using PlanetGeneration.TerrainGeneration;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEditorInternal;
+using System.IO;
+using System.Collections.Generic;
 
 namespace PlanetGeneration {
 
@@ -14,6 +16,8 @@ namespace PlanetGeneration {
         [HideInInspector]
         public TerrainLayer[] terrainLayers;
         public TerrainLayer baseLayer, layer01, layer02, layer03, layer04;
+
+        public ReorderableList reorderableList;
 
         public void Init() {
             terrainLayers = new TerrainLayer[5];

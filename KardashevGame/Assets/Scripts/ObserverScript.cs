@@ -22,7 +22,7 @@ public class ObserverScript : MonoBehaviour {
 
     [SerializeField, Range(0, PI * 0.5f)]
     private float latAngleLimit = PI * 0.5f;
-    [SerializeField, Range(0f, 10f)]
+    [SerializeField, Range(0.00001f, 10f)]
     private float velocityDampeningFactor;
 
     private void Start() {

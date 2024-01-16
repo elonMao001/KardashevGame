@@ -72,28 +72,14 @@ public class PlanetGenerator : MonoBehaviour {
         chunkHandler = new ChunkHandler(cubeSphere, maxDepth, levels, chunkRangeTests[(int)chunkRangeTestMode]);
 
         colorGenerator.UpdateElevationMinMax(terrainGenerator.minmax);
-        colorGenerator.UpdateGradient();
+        colorGenerator.UpdateSurfaceGradient();
+        colorGenerator.UpdateOceanfloorGradient();
         colorSettings.planetMaterial.SetFloat("_planetRadius", shapeSettings.radius);
     }
 
     private void FixedUpdate() {
-        if (shapeNeedsUpdating && updateCounter > updateDelay) {
-            UpdateLayeresAndGenerators();
-
-            if (planetViewMode == PlanetViewMode.Normal)
-                UpdateChunks();
-            else {
-                int index = (int)planetViewMode - 1;
-                foreach (Chunk chunk in chunkHandler.GetGeneratedChunks()) 
-                    Destroy(chunk.myObject.gameObject);
-                chunkHandler.GetGeneratedChunks().Clear();
-                chunkHandler.GetLoadedChunks().Clear();
-
-                cubeSphere.GenerateFace(index);
-                CreateChunkObject(cubeSphere.faces[index]);
-                chunkHandler.GetGeneratedChunks().Add(cubeSphere.faces[index]);
-                chunkHandler.GetLoadedChunks().Add(cubeSphere.faces[index]);
-            } 
+        if (shapeNeedsUpdating && updateCounter > updateDelay) { 
+            UpdateShape();
 
             shapeNeedsUpdating = false;
             updateCounter = 0;
@@ -104,9 +90,6 @@ public class PlanetGenerator : MonoBehaviour {
             CreateChunks();
             DestroyChunks();
         }
-
-        colorGenerator.UpdateElevationMinMax(terrainGenerator.minmax);
-        colorSettings.planetMaterial.SetFloat("_planetRadius", shapeSettings.radius);
     }
 
     private void CreateChunks() {
@@ -144,6 +127,28 @@ public class PlanetGenerator : MonoBehaviour {
         terrainGenerator.minmax.Reset();
     }
 
+    public void UpdateShape() {
+        UpdateLayeresAndGenerators();
+
+        if (planetViewMode == PlanetViewMode.Normal)
+            UpdateChunks();
+        else {
+            int index = (int)planetViewMode - 1;
+            foreach (Chunk chunk in chunkHandler.GetGeneratedChunks()) 
+                Destroy(chunk.myObject.gameObject);
+            chunkHandler.GetGeneratedChunks().Clear();
+            chunkHandler.GetLoadedChunks().Clear();
+
+            cubeSphere.GenerateFace(index);
+            CreateChunkObject(cubeSphere.faces[index]);
+            chunkHandler.GetGeneratedChunks().Add(cubeSphere.faces[index]);
+            chunkHandler.GetLoadedChunks().Add(cubeSphere.faces[index]);
+        } 
+
+        colorGenerator.UpdateElevationMinMax(terrainGenerator.minmax);
+        colorGenerator.UpdatePlanetRadius(shapeSettings.radius);
+    }
+
     public void UpdateChunks() {
         List<Chunk> chunks = chunkHandler.GetGeneratedChunks();
         chunks = chunks.OrderBy(c => c.Depth).ToList();
@@ -162,7 +167,8 @@ public class PlanetGenerator : MonoBehaviour {
             chunk.myObject.GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
         }
         
-        colorGenerator.UpdateGradient();
+        colorGenerator.UpdateSurfaceGradient();
+        colorGenerator.UpdateOceanfloorGradient();
     }
 
     public float GetRadius() {
