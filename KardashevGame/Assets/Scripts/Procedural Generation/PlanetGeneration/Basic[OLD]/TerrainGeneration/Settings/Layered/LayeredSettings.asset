@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d1bcc0ab3d9a248bb615431ae86003, type: 3}
+  m_Name: LayeredSettings
+  m_EditorClassIdentifier: 
+  seed: 15112
+  heightLayerNum: 5
+  heightFrequency: 2.15
+  heightAmplitude: 0.021
+  heightLacurancy: 2.7
+  heightPersistance: 0.52
+  humidityLayerNum: 5
+  humidityFrequency: 4.25
+  humidityLacurancy: 2.67
+  humidityPersistence: 0.68
+  heightOffset: 0.5
+  humidityOffset: 0.51
+  display: 1
