@@ -1,0 +1,18 @@
+Indexe:
+Index  Name  Bild   
+
+Rezepte:
+Index  Rezeptname  Anzahl Zutaten  Index Zutat 1  Anzahl Zutat 1  Index Zutat n  Anzahl Zutat n  ...  Anzahl Ergebnisse  Index Ergebnis 1  Anzahl Ergebnis 1  Index Ergebnis n  Anzahl Ergebnis n  ...  Fabrik Index  Benötigte Zeit   
+
+Gebäude:
+Index  Gebäudename  Anzahl Inputs  Input 1 x  Input 1 y  Input 1 z  Input n x  Input n y  Input n z  ...  Anzahl Outputs  Output 1 x  Output 1 y  Output 1 z  Output n x  Output n y  Output n z  ...  
+
+
+Wichtiges:
+Am Zeilenende immer drei Leerzeichen!
+Zwischen Inhalten immer zwei Leerzeichen!
+Dezimalzahlen werden mit ',' getrennt statt mit '.'!
+-1 = Null-Index!
+Zeiten in Sekunden!
+Bilder anscheinend sohne Endungen!
+Beim Auslesen ist der letzte Eintrag zu ignorieren ("   ")!

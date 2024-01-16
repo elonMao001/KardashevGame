@@ -1,0 +1,8 @@
+0  Stone Axe  2  0  1  1  2  1  9  1  3  30   
+1  Iron Axe  2  2  1  1  2  1  10  1  4  45   
+2  Weird Orb  4  11  3  13  1  14  8  15  6  1  12  1  5  80   
+3  Water Extraction  0  1  19  5  1  0,5   
+4  Spare-Parts-Cycle  2  13  1  15  2  1  17  12  3  20   
+5  Mostly Water  1  14  5  1  19  2  2  8   
+6  DIY Traffic Light  3  17  3  15  1  12  3  1  16  1  4  60   
+7  Greenhouse  2  19  20  18  5  1  14  40  3  120

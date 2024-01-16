@@ -1,0 +1,20 @@
+0  Stone  Stone.jpg   
+1  Wood  Wood.jpg   
+2  Iron  Iron.jpg   
+3  Plutonium  Pluto.jpg   
+4  Magma  Magma.jpg   
+5  Salt  Salt.jpg   
+6  Oxygen  Oxygen.jpg   
+7  LaserCrystals  LaserC.jpg   
+8  DysonSphereParts  DysonParts.jpg   
+9  Stone Axe  StoneAxe.jpg   
+10  Iron Axe  IronAxe.jpg   
+11  Bean  Bohne   
+12  Orb  Orb   
+13  Space-Shuttle  Space   
+14  Tomato  Tomato   
+15  Trumpet  Trumpet   
+16  Traffic Light  Ampel   
+17  Bicycle  Fahrrad   
+18  Light Bulb  Glühbirne   
+19  Water  Water   
