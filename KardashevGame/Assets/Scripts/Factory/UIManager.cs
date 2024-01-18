@@ -21,22 +21,27 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(uIopen);
         if (uIopen)
         {
-            UpdateProgressAndCounts();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CloseUI();
+                uIopen = false;
+                openedFactory = null;
+                openendUI = null;
+                return;
+            }
+            else
+            {
+                UpdateProgressAndCounts();
+            }
         }
         else
         {
             if (Input.GetMouseButtonDown(0))
             {
                 CheckRay();
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                CloseUI();
-                uIopen = false;
-                openedFactory = null;
-                openendUI = null;
             }
         }
     }
@@ -45,7 +50,7 @@ public class UIManager : MonoBehaviour
         RaycastHit hit;
         if(uIopen || !Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
             return;
-        if (hit.collider.gameObject.CompareTag("factory"))
+        if (hit.collider.gameObject.CompareTag("Factory"))
         {
             OpenUI(hit.collider.gameObject);
         }
@@ -63,6 +68,7 @@ public class UIManager : MonoBehaviour
 
         GameObject UI = Instantiate(factoryUI);
         UI.GetComponent<Canvas>().worldCamera = Camera.main;
+        UI.GetComponent<Canvas>().planeDistance = 1;
 
         UI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = recipe.recipeRate + "s ";
         UI.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text = recipe.recipeName;
@@ -89,6 +95,7 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
         if (origPanel == null)
             return;
 
+        Debug.Log(images.Length);
         origPanel.GetComponent<RectTransform>().localPosition = new Vector3(215 * x, (images.Length - 1) * 50, 0);
         origPanel.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Goods Sprites/" + images[0]);
         origPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = names[0];
@@ -130,6 +137,7 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
         }
 
         UI.GetComponent<Canvas>().worldCamera = Camera.main;
+        UI.GetComponent<Canvas>().planeDistance = 1;
 
         openedFactory = factory;
         openendUI = UI;
