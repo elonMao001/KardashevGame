@@ -47,7 +47,7 @@ public class PlanetGenerator : MonoBehaviour {
     private ChunkHandler chunkHandler;
     private Transform[] levels;
 
-    private int maxDepth = 0;
+    private int maxDepth = 5;
     private bool shapeNeedsUpdating = false;
     private int updateCounter = 0;
     [SerializeField]
