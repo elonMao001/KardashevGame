@@ -16,30 +16,25 @@ public class PlanetGenerator : MonoBehaviour {
 
     [SerializeField]
     private Transform chunkPrefab;
-    [SerializeField]
-    private Transform observer;
+
+    public Transform observer;
 
     public ShapeSettings shapeSettings;
     public ColorSettings colorSettings;
 
-    public enum PlanetViewMode {
-        Normal, Front
-    }
-    [SerializeField]
-    private PlanetViewMode planetViewMode;
-
     [Header("Settings")]
 
-    [SerializeField, Range(0.01f, 10f)]
-    private float distanceThreshold;
+    [SerializeField]
+    private bool testPlanet;
+    private bool testPlanetInited;
 
-    public enum ChunkRangeTestMode { Distance, ClosestDistance, UsingHelpSphere }
     [SerializeField]
-    public ChunkRangeTest[] chunkRangeTests = new ChunkRangeTest[] {
-        new Distance(), new ClosestDistance(), new UsingHelpSphere()
-    };
-    [SerializeField]
-    private ChunkRangeTestMode chunkRangeTestMode = 0;
+    private TestMode testMode;
+    private TestMode lastTestMode;
+    [Flags]
+    public enum TestMode {
+        Nothing = 0, Right = 1, Top = 2, Front = 4, Back = 8, Bottom = 16, Left = 32
+    }
 
     private TerrainGenerator terrainGenerator;
     private ColorGenerator colorGenerator;
@@ -47,11 +42,15 @@ public class PlanetGenerator : MonoBehaviour {
     private ChunkHandler chunkHandler;
     private Transform[] levels;
 
-    private int maxDepth = 5;
+    [HideInInspector]
+    public const int maxDepth = 3;
     private bool shapeNeedsUpdating = false;
     private int updateCounter = 0;
     [SerializeField]
     private int updateDelay = 10;
+
+    [Range(0.01f, 1f)]
+    public float maxChunkViewPercentage;
     
     void Start() { 
         chunkPrefab.GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
@@ -69,7 +68,7 @@ public class PlanetGenerator : MonoBehaviour {
         colorGenerator = new ColorGenerator(colorSettings);
 
         cubeSphere = new CubeSphere(terrainGenerator);
-        chunkHandler = new ChunkHandler(cubeSphere, maxDepth, levels, chunkRangeTests[(int)chunkRangeTestMode]);
+        chunkHandler = new ChunkHandler(cubeSphere, maxDepth, levels, new ChunkRangeTest(this));
 
         colorGenerator.UpdateElevationMinMax(terrainGenerator.minmax);
         colorGenerator.UpdateSurfaceGradient();
@@ -85,8 +84,17 @@ public class PlanetGenerator : MonoBehaviour {
             updateCounter = 0;
         } else updateCounter++;
 
-        if (planetViewMode == PlanetViewMode.Normal) {
-            chunkHandler.UpdateLoadedChunks(new InitData(observer, transform, distanceThreshold, shapeSettings));
+        if (testPlanet) {
+            if (lastTestMode != testMode || !testPlanetInited) {
+                chunkHandler.PlanetTestMode((int)testMode);
+                CreateChunks();
+                DestroyChunks();
+
+                lastTestMode = testMode;
+                testPlanetInited = true;
+            }
+        } else {
+            chunkHandler.UpdateLoadedChunks();
             CreateChunks();
             DestroyChunks();
         }
@@ -121,32 +129,16 @@ public class PlanetGenerator : MonoBehaviour {
         shapeNeedsUpdating = true;
     }
 
-    private void UpdateLayeresAndGenerators() {
+    private void UpdateLayersAndGenerators() {
         shapeSettings.InitTerrainLayers();
         terrainGenerator.InitTerrainBundles();
         terrainGenerator.minmax.Reset();
-    }
+    }   
 
     public void UpdateShape() {
-        UpdateLayeresAndGenerators();
-
-        if (planetViewMode == PlanetViewMode.Normal)
-            UpdateChunks();
-        else {
-            int index = (int)planetViewMode - 1;
-            foreach (Chunk chunk in chunkHandler.GetGeneratedChunks()) 
-                Destroy(chunk.myObject.gameObject);
-            chunkHandler.GetGeneratedChunks().Clear();
-            chunkHandler.GetLoadedChunks().Clear();
-
-            cubeSphere.GenerateFace(index);
-            CreateChunkObject(cubeSphere.faces[index]);
-            chunkHandler.GetGeneratedChunks().Add(cubeSphere.faces[index]);
-            chunkHandler.GetLoadedChunks().Add(cubeSphere.faces[index]);
-        } 
-
-        colorGenerator.UpdateElevationMinMax(terrainGenerator.minmax);
-        colorGenerator.UpdatePlanetRadius(shapeSettings.radius);
+        UpdateLayersAndGenerators();
+        UpdateChunks();
+        colorSettings.planetMaterial.SetFloat("_PlanetRadius", shapeSettings.radius);
     }
 
     public void UpdateChunks() {
@@ -164,6 +156,7 @@ public class PlanetGenerator : MonoBehaviour {
 
         chunkPrefab.GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
         foreach (Chunk chunk in chunkHandler.GetGeneratedChunks()) {
+            Debug.Log(chunk.Index);
             chunk.myObject.GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
         }
         
@@ -173,5 +166,9 @@ public class PlanetGenerator : MonoBehaviour {
 
     public float GetRadius() {
         return transform.localScale.x * shapeSettings.radius;
+    }
+
+    public void OnValidate() {
+        if (!testPlanet) testPlanetInited = testPlanet;
     }
 }

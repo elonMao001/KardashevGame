@@ -8,6 +8,7 @@ using PlanetGeneration.Chunks;
 using PlanetGeneration.TerrainGeneration;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace PlanetGeneration.Chunks {
     public class ChunkHandler {
@@ -33,8 +34,8 @@ namespace PlanetGeneration.Chunks {
             destroyChunks = new List<Chunk>();
         }
 
-        public void UpdateLoadedChunks(InitData initData) {
-            List<Chunk> chunksInRange = GetChunksInRange(initData);
+        public void UpdateLoadedChunks() {
+            List<Chunk> chunksInRange = GetChunksInRange();
             List<Chunk> toBeLoaded = FilterLoadedChunks(chunksInRange);
 
             RecycleAndLoad(toBeLoaded);
@@ -44,11 +45,11 @@ namespace PlanetGeneration.Chunks {
         }
 
         // Finds chunks in Range of the observer
-        private List<Chunk> GetChunksInRange(InitData initData) {
+        private List<Chunk> GetChunksInRange() {
             List<Chunk> quadTree = new List<Chunk>(cubeSphere.faces);
             List<Chunk> chunksInRange = new List<Chunk>();
 
-            chunkRangeTest.Init(initData);
+            chunkRangeTest.Init();
 
             while (quadTree.Any()) {
                 Chunk current = quadTree[0];
@@ -59,12 +60,16 @@ namespace PlanetGeneration.Chunks {
                     generatedChunks.Add(current);
                 }
                 
-                if (current.Depth < maxDepth && chunkRangeTest.IsInRange(current)) {
-                    if (current.subChunks == null)
-                        current.SubDivide();
+                if (chunkRangeTest.IsInRange(current)) {
+                    if (current.Depth == chunkRangeTest.depth) {
+                        chunksInRange.Add(current);
+                    } else {
+                        if (current.subChunks == null)
+                            current.SubDivide();
 
-                    quadTree.AddRange(current.subChunks);
-                } else chunksInRange.Add(current);
+                        quadTree.AddRange(current.subChunks);
+                    }
+                }
             }
 
             return chunksInRange;
@@ -108,6 +113,21 @@ namespace PlanetGeneration.Chunks {
                 createChunks.Add(toBeLoaded[tblindex]);
                 
                 tblindex++;
+            }
+        }
+
+        public void PlanetTestMode(int faces) {
+            destroyChunks.AddRange(loadedChunks);
+
+            loadedChunks.Clear();
+            generatedChunks.Clear();
+            for (int i = 0; i < 6; i++) {
+                if ((faces & Func.ThePowersThatB2[i]) != 0) {
+                    loadedChunks.Add(cubeSphere.faces[i]);
+                    generatedChunks.Add(cubeSphere.faces[i]);
+                    createChunks.Add(cubeSphere.faces[i]);
+                    destroyChunks.Remove(cubeSphere.faces[i]);
+                }
             }
         }
 

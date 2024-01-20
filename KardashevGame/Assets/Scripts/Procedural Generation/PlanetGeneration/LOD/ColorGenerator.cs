@@ -20,7 +20,6 @@ namespace PlanetGeneration.TerrainGeneration {
         }
         
         public void UpdateElevationMinMax(MinMax minmax) {
-            Debug.Log(minmax.max + " " + minmax.min);
             colorSettings.planetMaterial.SetVector("_ElevationMinMax", new Vector4(minmax.min, minmax.max));
         }
 

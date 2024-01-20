@@ -4,76 +4,40 @@ using PlanetGeneration.TerrainGeneration;
 
 using static UnityEngine.Mathf;
 using System.Security.Cryptography;
+using System;
 
 namespace PlanetGeneration.Chunks {
-    public abstract class ChunkRangeTest {
-        public abstract void Init(InitData initData);
-        public abstract bool IsInRange(Chunk chunk);
-    }
+    public class ChunkRangeTest {
+        private PlanetGenerator planetGenerator;
 
-    public class Distance : ChunkRangeTest {
-        private float threshold;
-        private Vector3 observerPosition;
-
-        public override void Init(InitData initData) {
-            observerPosition = initData.observer.position;
-            threshold = initData.threshhold;
-        }
-
-        public override bool IsInRange(Chunk chunk) {
-            if ((chunk.mesh.bounds.center - observerPosition).magnitude < threshold) 
-                return true;
-            return false;
-        }
-    }
-
-    public class ClosestDistance : ChunkRangeTest {
-        private float threshhold;
-        private Vector3 observerPosition;
-
-        public override void Init(InitData initData) {
-            observerPosition = initData.observer.position;
-            threshhold = initData.threshhold;
-        }
-
-        public override bool IsInRange(Chunk chunk) {
-            if ((chunk.mesh.bounds.ClosestPoint(observerPosition) - observerPosition).magnitude < threshhold) 
-                return true;
-            return false;
-        }
-    }
-
-    public class UsingHelpSphere : ChunkRangeTest {
         private Vector3 closestPointOnSurface;
         private float threshholdToSurfacePoint;
 
-        public override void Init(InitData initData) {
-            Vector3 diff = initData.observer.position - initData.planet.position;
-            closestPointOnSurface = Vector3.Normalize(diff) * initData.settings.radius;
+        public int depth;
 
-            Camera camera = initData.observer.GetComponentInChildren<Camera>();
+        private Plane[] frustumPlanes;
 
-            threshholdToSurfacePoint = Tan(camera.fieldOfView * 0.5f * Deg2Rad) * (diff.magnitude - initData.settings.radius * initData.planet.localScale.x);
-            threshholdToSurfacePoint *= threshholdToSurfacePoint;
+        public ChunkRangeTest(PlanetGenerator planetGenerator) {
+            this.planetGenerator = planetGenerator;
         }
 
-        public override bool IsInRange(Chunk chunk) {
-            float dist = chunk.mesh.bounds.SqrDistance(closestPointOnSurface);
-            if (dist < threshholdToSurfacePoint) return true;
+        public void Init() {
+            Vector3 diff = planetGenerator.observer.position - planetGenerator.transform.position;
+            closestPointOnSurface = Vector3.Normalize(diff) * planetGenerator.GetRadius();
+
+            Camera camera = planetGenerator.observer.GetComponentInChildren<Camera>();
+
+            float distToSurface = (closestPointOnSurface - planetGenerator.observer.position).magnitude;
+            depth = Clamp((int)Min(Log(2 * distToSurface * Tan(camera.fieldOfView) * planetGenerator.maxChunkViewPercentage) * -1.44269504089f), 0, PlanetGenerator.maxDepth);
+            
+            frustumPlanes = GeometryUtility.CalculateFrustumPlanes(camera);
+        }
+
+        public bool IsInRange(Chunk chunk) {
+            if (GeometryUtility.TestPlanesAABB(frustumPlanes, chunk.mesh.bounds) && 
+                Vector3.Angle(closestPointOnSurface, chunk.mesh.bounds.center) < 120) // should be 135
+                return true;
             return false;
-        }
-    }
-
-    public struct InitData {
-        public Transform observer, planet;
-        public float threshhold;
-        public ShapeSettings settings;
-
-        public InitData(Transform observer, Transform planet, float threshhold, ShapeSettings settings) {
-            this.observer = observer;
-            this.planet = planet;
-            this.threshhold = threshhold;
-            this.settings = settings;
         }
     }
 }
