@@ -74,6 +74,8 @@ public class PlanetGenerator : MonoBehaviour {
         colorGenerator.UpdateSurfaceGradient();
         colorGenerator.UpdateOceanfloorGradient();
         colorSettings.planetMaterial.SetFloat("_planetRadius", shapeSettings.radius);
+
+
     }
 
     private void FixedUpdate() {
@@ -120,6 +122,12 @@ public class PlanetGenerator : MonoBehaviour {
 
     private void CreateChunkObject(Chunk chunk) {
         chunk.myObject = Instantiate(chunkPrefab, levels[chunk.Depth]);
+
+
+        //temporärer (?) Timon-Eingriff
+        chunk.myObject.GetComponent<MeshCollider>().sharedMesh = chunk.mesh;
+
+
         chunk.ApplyMesh();
     }
 

@@ -26,11 +26,13 @@ public class SelectButton : MonoBehaviour
     }
 
     public void RecipeChosen() {
+        Debug.Log("chosen");
         player.GetComponent<UIManager>().RecipeButtonPressed(transform.parent.GetSiblingIndex()); //Muss von parent sein
     }
 
     public void ChooseRecipe()
     {
+        Debug.Log("Choose");
         player.GetComponent<UIManager>().SelectButtonPressed();
     }
 }

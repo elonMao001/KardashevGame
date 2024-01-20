@@ -31,7 +31,7 @@ public class Builder : MonoBehaviour
         if (!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100) || gameObject.GetComponent<UIManager>().uIopen)
             return;
 
-        if (hit.collider.gameObject.name == "Ground" || selected == 0)
+        if (hit.collider.gameObject.CompareTag("Ground") || selected == 0)
         {
             if (selected != 0) { 
                 ConstructFactory(hit);
@@ -49,11 +49,9 @@ public class Builder : MonoBehaviour
         g.AddComponent<Factory>();
         g.AddComponent<BoxCollider>();
 
-        g.tag = "factory";
+        g.tag = "Factory";
 
-        g.transform.position = Vector3.zero;
-
-        g.transform.position = hit.point + new Vector3(0, 10, 0);
+        g.transform.position = hit.point + new Vector3(0, 0, 0);
         g.transform.localScale = new Vector3(1, 1, 1);
         g.transform.Rotate(new Vector3(90, transform.rotation.eulerAngles.y, 0));
 
