@@ -82,6 +82,36 @@ public class Conveyor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(CanPullPush())
+        {
+            PullPush();
+        }
+    }
+
+    void PullPush()
+    {
+        Recipe inputRec = input.GetRecipe();
+        Recipe outputRec = output.GetRecipe();
+        for (int i = 0; i < inputRec.outputIDs.Length; i++) {
+            int good = inputRec.outputIDs[i];
+            for (int j = 0; j < outputRec.inputIDs.Length; j++)
+            {
+                if (good == outputRec.inputIDs[j])
+                {
+                    while (input.outputGoodsFill[i] > 0 && output.inputGoodsFill[j] < output.FACTORYCAPACITY)
+                    {
+                        Factory.AddGoods(output.inputGoods[j], output.inputGoodsFill[j], 1, good); //Verbesserbar (Warum immer nur eins)
+                        Factory.SubtractGoods(input.outputGoods[i], input.outputGoodsFill[i], 1);
+                    }
+                }
+            }
+        }
+    }
+
+    bool CanPullPush()
+    {
+        if (input != null && output != null && input.GetRecipe() != null && output.GetRecipe() != null)
+            return true;
+        return false;
     }
 }
