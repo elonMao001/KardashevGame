@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Builder : MonoBehaviour
 {
     static public char selected = '0';
+    static public char[] existingKeys = { 'i', 'f', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
 
     public GameObject[] defaultBuildings = new GameObject[4];
+    public GameObject inventory;
 
     // Start is called before the first frame update
     void Start()
@@ -152,11 +156,50 @@ public class Builder : MonoBehaviour
         CheckSelection();
     }
 
-    void CheckSelection()
+    void CheckSelection()  // highly inefficient upon expansion
     {
         Event e = Event.current;
-        if (e.type != EventType.KeyDown)
+        if (e.type != EventType.KeyDown || e.character == selected || !Support.ArrayContains(existingKeys, e.character))
             return;
+        Debug.Log("here");
+        Debug.Log(e.character + " " + selected);
+        if (e.character == 'i')
+        {
+            inventory.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = new Vector4(200, 100, 100, 255);
+            if(selected == 'f')
+            {
+                inventory.transform.GetChild(0).GetChild(13).GetComponent<Image>().color = new Vector4(255, 255, 255, 255);
+            }
+            else
+            {
+                inventory.transform.GetChild(0).GetChild(selected - '0' + 1).GetComponent<Image>().color = new Vector4(200, 100, 100, 255);
+            }
+            Debug.Log(inventory.transform.GetChild(0).GetChild(0).GetComponent<Image>().color);
+        } else if(e.character == 'f')
+        {
+            inventory.transform.GetChild(0).GetChild(13).GetComponent<Image>().color = new Vector4(200, 100, 100, 255);
+            if (selected == 'i')
+            {
+                inventory.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = new Vector4(255, 255, 255, 255);
+            }
+            else
+            {
+                inventory.transform.GetChild(0).GetChild(selected - '0' + 1).GetComponent<Image>().color = new Vector4(200, 100, 100, 255);
+            }
+        }
+        else
+        {
+            if (selected == 'i' || selected == 'f')
+            {
+                inventory.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = new Vector4(255, 255, 255, 255);
+                inventory.transform.GetChild(0).GetChild(13).GetComponent<Image>().color = new Vector4(255, 255, 255, 255);
+            }
+            else
+            {
+                inventory.transform.GetChild(0).GetChild(selected - '0' + 1).GetComponent<Image>().color = new Vector4(200, 100, 100, 255);
+            }
+        }
+
         selected = e.character;
         return;
         switch (e.keyCode)

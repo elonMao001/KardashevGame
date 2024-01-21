@@ -78,4 +78,14 @@ public static class Support
         }
         return size;
     }
+
+    public static bool ArrayContains(char[] array, char test)
+    {
+        foreach (char c in array)
+        {
+            if (c == test)
+                return true;
+        }
+        return false;
+    }
 }

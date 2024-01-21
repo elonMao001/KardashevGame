@@ -32,8 +32,8 @@
 31  Copper Ingot  CopperIngot   
 32  Glass  Glass   
 33  Credits  Credits   
-34  Simple Electronics  SimpleElectronics   
-35  Advanced Electronics  AdvancedElectronics   
+34  Simple Electronics  Diode   
+35  Advanced Electronics  Transistor   
 36  Poser Electronics  PoserElectronics   
 37  Extractor  Extractor   
 38  Refinery  Refinery   
