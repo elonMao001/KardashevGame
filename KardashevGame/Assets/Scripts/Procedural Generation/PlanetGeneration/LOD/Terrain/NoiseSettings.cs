@@ -14,30 +14,39 @@ namespace PlanetGeneration.TerrainGeneration {
         }
         public FilterType filterType;
 
-        public LayeredNoiseSettings layeredNoiseSettings;
-        public RigidNoiseSettings rigidNoiseSettings;
-        public DistortedNoiseSettings distortedNoiseSettings;
-        public StepNoiseSettings stepNoiseSettings;
+        [SerializeReference]
+        public INoiseSettings settings;
+
+        [HideInInspector] public LayeredNoiseSettings layeredNoiseSettings;
+        [HideInInspector] public RigidNoiseSettings rigidNoiseSettings;
+        [HideInInspector] public DistortedNoiseSettings distortedNoiseSettings;
+        [HideInInspector] public StepNoiseSettings stepNoiseSettings;
 
         public void Init() {
             switch (filterType) {
                 case FilterType.LayeredNoise:
                     layeredNoiseSettings.Init();
+                    settings = layeredNoiseSettings;
                     break;
                 case FilterType.RigidNoise:
                     rigidNoiseSettings.Init();
+                    settings = rigidNoiseSettings;
                     break;
                 case FilterType.DistortedNoise:
                     distortedNoiseSettings.Init();
+                    settings = distortedNoiseSettings;
                     break;
                 case FilterType.StepNoise:
                     stepNoiseSettings.Init();
+                    settings = stepNoiseSettings;
                     break;
             }
         }
 
+        public interface INoiseSettings { }
+
         [Serializable]
-        public class LayeredNoiseSettings {
+        public class LayeredNoiseSettings : INoiseSettings {
             public Vector3 center;
 
             [Min(0)]
@@ -68,7 +77,7 @@ namespace PlanetGeneration.TerrainGeneration {
 
         }
         [Serializable]
-        public class RigidNoiseSettings {
+        public class RigidNoiseSettings : INoiseSettings {
             public Vector3 center;
 
             [Min(0)]
@@ -99,7 +108,7 @@ namespace PlanetGeneration.TerrainGeneration {
 
         }
         [Serializable]
-        public class DistortedNoiseSettings {
+        public class DistortedNoiseSettings : INoiseSettings {
             public Vector3 center;
             [Min(0)]
             public float amplitude = 5f;
@@ -150,7 +159,7 @@ namespace PlanetGeneration.TerrainGeneration {
 
         }
         [Serializable]
-        public class StepNoiseSettings {
+        public class StepNoiseSettings : INoiseSettings {
             public Vector3 center;
             [Min(0)]
             public float amplitude = 5f;

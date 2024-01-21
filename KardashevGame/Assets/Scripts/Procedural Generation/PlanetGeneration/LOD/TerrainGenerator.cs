@@ -36,12 +36,11 @@ namespace PlanetGeneration.TerrainGeneration {
                     } else {
                         float currentAmplitude = terrainBundles[i].terrainFilter.GetAmplitude(pointOnUnitSphere);
 
-                        if (i == 0 || currentAmplitude > 0) {
-                            if (shapeSettings.terrainLayers[i].useMask)
-                                currentAmplitude *= terrainBundles[i].mask.GetAmplitude(pointOnUnitSphere);
+                        if (shapeSettings.terrainLayers[i].useMask)
+                            currentAmplitude *= Max(0, terrainBundles[i].mask.GetAmplitude(pointOnUnitSphere));
 
+                        if (i == 0 || currentAmplitude > 0)
                             amplitude += currentAmplitude;
-                        }
                     }   
                 }
             }
