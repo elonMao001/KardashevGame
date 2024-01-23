@@ -45,9 +45,9 @@ public class PlanetGenerator : MonoBehaviour {
     [HideInInspector]
     public const int maxDepth = 3;
     private bool shapeNeedsUpdating = false;
-    private int updateCounter = 0;
+    private float updateCounter = 0;
     [SerializeField]
-    private int updateDelay = 10;
+    private float updateDelay = 10;
 
     [Range(0.01f, 1f)]
     public float maxChunkViewPercentage;
@@ -74,32 +74,32 @@ public class PlanetGenerator : MonoBehaviour {
         colorGenerator.UpdateSurfaceGradient();
         colorGenerator.UpdateOceanfloorGradient();
         colorSettings.planetMaterial.SetFloat("_planetRadius", shapeSettings.radius);
-
-
     }
 
-    private void FixedUpdate() {
-        if (shapeNeedsUpdating && updateCounter > updateDelay) { 
-            UpdateShape();
-
-            shapeNeedsUpdating = false;
-            updateCounter = 0;
-        } else updateCounter++;
-
+    private void Update() {
         if (testPlanet) {
             if (lastTestMode != testMode || !testPlanetInited) {
                 chunkHandler.PlanetTestMode((int)testMode);
                 CreateChunks();
-                DestroyChunks();
 
                 lastTestMode = testMode;
                 testPlanetInited = true;
             }
-        } else {
+
+            if (shapeNeedsUpdating && updateCounter > updateDelay) { 
+                UpdateShape();
+
+                shapeNeedsUpdating = false;
+                updateCounter = 0;
+            }
+        } else if (updateCounter >= updateDelay) {
             chunkHandler.UpdateLoadedChunks();
             CreateChunks();
-            DestroyChunks();
+
+            updateCounter = 0;
         }
+
+        updateCounter += Time.deltaTime;
     }
 
     private void CreateChunks() {
@@ -111,21 +111,12 @@ public class PlanetGenerator : MonoBehaviour {
         }
     }
 
-    private void DestroyChunks() {
-        List<Chunk> chunks = chunkHandler.GetChunksToDestroy();
-
-        while (chunks.Any()) {
-            Destroy(chunks[0].myObject.gameObject);
-            chunks.RemoveAt(0);
-        }
-    } 
-
     private void CreateChunkObject(Chunk chunk) {
         chunk.myObject = Instantiate(chunkPrefab, levels[chunk.Depth]);
 
 
-        //temporärer (?) Timon-Eingriff
-        chunk.myObject.GetComponent<MeshCollider>().sharedMesh = chunk.mesh;
+        //temporï¿½rer (?) Timon-Eingriff
+        //chunk.myObject.GetComponent<MeshCollider>().sharedMesh = chunk.mesh;
 
 
         chunk.ApplyMesh();
@@ -163,9 +154,9 @@ public class PlanetGenerator : MonoBehaviour {
         if (chunkHandler == null) return;
 
         chunkPrefab.GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
-        foreach (Chunk chunk in chunkHandler.GetGeneratedChunks()) {
-            Debug.Log(chunk.Index);
-            chunk.myObject.GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
+        foreach (Chunk chunk in chunkHandler.GetLoadedChunks()) {
+            if (chunk.myObject != null)
+                chunk.myObject.GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
         }
         
         colorGenerator.UpdateSurfaceGradient();
@@ -177,6 +168,6 @@ public class PlanetGenerator : MonoBehaviour {
     }
 
     public void OnValidate() {
-        if (!testPlanet) testPlanetInited = testPlanet;
+        if (!testPlanet) testPlanetInited = false;
     }
 }
