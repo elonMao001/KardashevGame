@@ -134,20 +134,17 @@ public class PlanetGenerator : MonoBehaviour {
         terrainGenerator.minmax.Reset();
     }   
 
-    public void UpdateShape() {
+    private void UpdateShape() {
         UpdateLayersAndGenerators();
-        UpdateChunks();
+        UpdateLoadedFaces();
         colorSettings.planetMaterial.SetFloat("_PlanetRadius", shapeSettings.radius);
     }
 
-    public void UpdateChunks() {
-        List<Chunk> chunks = chunkHandler.GetGeneratedChunks();
-        chunks = chunks.OrderBy(c => c.Depth).ToList();
-        
-        cubeSphere.GenerateFaces();
-        foreach (Chunk chunk in chunkHandler.GetGeneratedChunks())
-            if (chunk.Depth != 0)
-                cubeSphere.GenerateSubChunk(chunk); 
+    private void UpdateLoadedFaces() {
+        Debug.Log(chunkHandler.GetLoadedChunks().Count);
+        foreach (Chunk chunk in chunkHandler.GetLoadedChunks()) {
+            cubeSphere.GenerateFace(chunk.Index);
+        }
     }
 
     public void OnColorSettingsUpdated() {
