@@ -104,9 +104,10 @@ namespace PlanetGeneration.Chunks {
         // Fully loads and unloads all chunks
         private void RecycleAndLoad(List<Chunk> toBeLoaded) {
             foreach (Chunk chunk in toBeLoaded) {
-                if (chunk.myObject != null)
+                if (chunk.myObject != null) {
                     chunk.myObject.gameObject.SetActive(true);
-                else if (deactivatedChunks.Any()) {
+                    deactivatedChunks.Remove(chunk);
+                } else if (deactivatedChunks.Any()) {
                     Chunk deactivatedChunk = deactivatedChunks[0];
                     deactivatedChunks.RemoveAt(0);
 

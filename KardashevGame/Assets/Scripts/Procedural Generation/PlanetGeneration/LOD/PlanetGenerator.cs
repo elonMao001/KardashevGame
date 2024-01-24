@@ -73,7 +73,7 @@ public class PlanetGenerator : MonoBehaviour {
         colorGenerator.UpdateElevationMinMax(terrainGenerator.minmax);
         colorGenerator.UpdateSurfaceGradient();
         colorGenerator.UpdateOceanfloorGradient();
-        colorSettings.planetMaterial.SetFloat("_planetRadius", shapeSettings.radius);
+        colorGenerator.UpdatePlanetRadius(shapeSettings.radius);
     }
 
     private void Update() {
@@ -137,7 +137,8 @@ public class PlanetGenerator : MonoBehaviour {
     private void UpdateShape() {
         UpdateLayersAndGenerators();
         UpdateLoadedFaces();
-        colorSettings.planetMaterial.SetFloat("_PlanetRadius", shapeSettings.radius);
+        colorGenerator.UpdatePlanetRadius(shapeSettings.radius);
+        colorGenerator.UpdateElevationMinMax(terrainGenerator.minmax);
     }
 
     private void UpdateLoadedFaces() {

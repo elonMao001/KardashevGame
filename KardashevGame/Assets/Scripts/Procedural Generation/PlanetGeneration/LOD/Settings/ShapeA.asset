@@ -12,167 +12,167 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f403e66184b614a4796d4a088724e7d2, type: 3}
   m_Name: ShapeA
   m_EditorClassIdentifier: 
-  radius: 0.62
-  seaDepth: 7.34
+  radius: 7.57
+  seaDepth: 0.01
   terrainLayers:
   - enabled: 1
-    useMask: 0
-    showMask: 0
+    affectsOcean: 1
+    maskMode: 0
     noiseSettings:
-      filterType: 0
+      filterType: 2
       settings:
-        rid: 9134762935977246820
+        rid: 9134762950542491815
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 2.48}
-        amplitude: 0.02
+        amplitude: 0.06
         frequency: 2.01
-        persistance: 0.513
-        lacunarity: 2.43
+        persistance: 0.484
+        lacunarity: 2.4
         noiseLayerCount: 6
         sealevel: 0.002
         noiseLayers:
-        - amplitude: 0.02
+        - amplitude: 0.06
           frequency: 2.01
           dimension: 500
-        - amplitude: 0.01026
-          frequency: 4.8843
+        - amplitude: 0.02904
+          frequency: 4.8240004
           dimension: 1500
-        - amplitude: 0.0052633802
-          frequency: 11.86885
+        - amplitude: 0.01405536
+          frequency: 11.577601
           dimension: 2500
-        - amplitude: 0.0027001142
-          frequency: 28.841305
+        - amplitude: 0.006802794
+          frequency: 27.786245
           dimension: 3500
-        - amplitude: 0.0013851586
-          frequency: 70.08437
+        - amplitude: 0.0032925522
+          frequency: 66.68699
           dimension: 4500
-        - amplitude: 0.0007105864
-          frequency: 170.30504
+        - amplitude: 0.0015935953
+          frequency: 160.04878
           dimension: 5500
-        - amplitude: 0.00036453083
-          frequency: 413.84125
+        - amplitude: 0.0007713001
+          frequency: 384.1171
           dimension: 6500
-        - amplitude: 0.00018700432
-          frequency: 1005.6343
+        - amplitude: 0.00037330925
+          frequency: 921.88104
           dimension: 7500
-        - amplitude: 0.00009593322
-          frequency: 2443.6914
+        - amplitude: 0.00018068167
+          frequency: 2212.5146
           dimension: 8500
-        - amplitude: 0.00004921374
-          frequency: 5938.1704
+        - amplitude: 0.00008744993
+          frequency: 5310.035
           dimension: 9500
       rigidNoiseSettings:
         center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
+        amplitude: 0.19
+        frequency: 4.25
+        persistance: 0.198
+        lacunarity: 3.6
+        noiseLayerCount: 4
         sealevel: 0
         noiseLayers:
-        - amplitude: 5
-          frequency: 0.2
+        - amplitude: 0.19
+          frequency: 4.25
           dimension: 500
-        - amplitude: 2.5
-          frequency: 0.4
+        - amplitude: 0.03762
+          frequency: 15.299999
           dimension: 1500
-        - amplitude: 1.25
-          frequency: 0.8
+        - amplitude: 0.00744876
+          frequency: 55.079994
           dimension: 2500
-        - amplitude: 0.625
-          frequency: 1.6
+        - amplitude: 0.0014748544
+          frequency: 198.28798
           dimension: 3500
-        - amplitude: 0.3125
-          frequency: 3.2
+        - amplitude: 0.00029202117
+          frequency: 713.83673
           dimension: 4500
-        - amplitude: 0.15625
-          frequency: 6.4
+        - amplitude: 0.00005782019
+          frequency: 2569.8123
           dimension: 5500
-        - amplitude: 0.078125
-          frequency: 12.8
+        - amplitude: 0.000011448397
+          frequency: 9251.324
           dimension: 6500
-        - amplitude: 0.0390625
-          frequency: 25.6
+        - amplitude: 0.0000022667828
+          frequency: 33304.766
           dimension: 7500
-        - amplitude: 0.01953125
-          frequency: 51.2
+        - amplitude: 0.000000448823
+          frequency: 119897.16
           dimension: 8500
-        - amplitude: 0.009765625
-          frequency: 102.4
+        - amplitude: 0.00000008886695
+          frequency: 431629.75
           dimension: 9500
       distortedNoiseSettings:
         center: {x: 12.24, y: 0, z: 0}
-        amplitude: 0.02
+        amplitude: 0.09
         frequency: 1.23
         persistance: 0.231
         lacunarity: 2.54
         noiseLayerCount: 5
         distortionCenter: {x: 0, y: 0, z: 0}
-        distortionAmplitude: 1.52
+        distortionAmplitude: 2.77
         distortionFrequency: 4.11
         distortionPersistance: 0.81
         distortionLacunarity: 2
         sealevel: 0
         noiseLayers:
-        - amplitude: 0.02
+        - amplitude: 0.09
           frequency: 1.23
           dimension: 500
-        - amplitude: 0.00462
+        - amplitude: 0.020790001
           frequency: 3.1242
           dimension: 1500
-        - amplitude: 0.00106722
+        - amplitude: 0.0048024906
           frequency: 7.935468
           dimension: 2500
-        - amplitude: 0.00024652784
+        - amplitude: 0.0011093754
           frequency: 20.15609
           dimension: 3500
-        - amplitude: 0.00005694793
+        - amplitude: 0.00025626572
           frequency: 51.19647
           dimension: 4500
-        - amplitude: 0.000013154972
+        - amplitude: 0.000059197384
           frequency: 130.03903
           dimension: 5500
-        - amplitude: 0.0000030387987
+        - amplitude: 0.000013674596
           frequency: 330.29913
           dimension: 6500
-        - amplitude: 0.0000007019625
+        - amplitude: 0.0000031588318
           frequency: 838.9598
           dimension: 7500
-        - amplitude: 0.00000016215334
+        - amplitude: 0.00000072969016
           frequency: 2130.9578
           dimension: 8500
-        - amplitude: 0.000000037457422
+        - amplitude: 0.00000016855843
           frequency: 5412.633
           dimension: 9500
         distortionNoiseLayers:
-        - amplitude: 1.52
+        - amplitude: 2.77
           frequency: 4.11
           dimension: 50500
-        - amplitude: 1.2312
+        - amplitude: 2.2437
           frequency: 8.22
           dimension: 51500
-        - amplitude: 0.997272
+        - amplitude: 1.817397
           frequency: 16.44
           dimension: 52500
-        - amplitude: 0.80779034
+        - amplitude: 1.4720916
           frequency: 32.88
           dimension: 53500
-        - amplitude: 0.65431017
+        - amplitude: 1.1923941
           frequency: 65.76
           dimension: 54500
-        - amplitude: 0.5299912
+        - amplitude: 0.96583927
           frequency: 131.52
           dimension: 55500
-        - amplitude: 0.4292929
+        - amplitude: 0.7823298
           frequency: 263.04
           dimension: 56500
-        - amplitude: 0.34772724
+        - amplitude: 0.63368714
           frequency: 526.08
           dimension: 57500
-        - amplitude: 0.28165907
+        - amplitude: 0.5132866
           frequency: 1052.16
           dimension: 58500
-        - amplitude: 0.22814384
+        - amplitude: 0.41576213
           frequency: 2104.32
           dimension: 59500
       stepNoiseSettings:
@@ -219,7 +219,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762935977246821
+        rid: 9134762950542491807
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 0}
         amplitude: 0.02
@@ -295,12 +295,12 @@ MonoBehaviour:
         sealevel: 0
         noiseLayers: []
   - enabled: 0
-    useMask: 0
-    showMask: 0
+    affectsOcean: 0
+    maskMode: 0
     noiseSettings:
       filterType: 1
       settings:
-        rid: 9134762935977246822
+        rid: 9134762950542491808
       layeredNoiseSettings:
         center: {x: -22.59, y: 0, z: 0}
         amplitude: 4.64
@@ -342,42 +342,42 @@ MonoBehaviour:
           dimension: 9500
       rigidNoiseSettings:
         center: {x: 0, y: 0, z: 0}
-        amplitude: 0.02
-        frequency: 1.7
+        amplitude: 0.03
+        frequency: 2.46
         persistance: 0.766
         lacunarity: 2.34
         noiseLayerCount: 5
         sealevel: 0.02
         noiseLayers:
-        - amplitude: 0.02
-          frequency: 1.7
+        - amplitude: 0.03
+          frequency: 2.46
           dimension: 500
-        - amplitude: 0.015319999
-          frequency: 3.978
+        - amplitude: 0.022979999
+          frequency: 5.7564
           dimension: 1500
-        - amplitude: 0.011735119
-          frequency: 9.308519
+        - amplitude: 0.017602678
+          frequency: 13.469975
           dimension: 2500
-        - amplitude: 0.0089891
-          frequency: 21.781935
+        - amplitude: 0.013483651
+          frequency: 31.519741
           dimension: 3500
-        - amplitude: 0.0068856506
-          frequency: 50.969727
+        - amplitude: 0.010328476
+          frequency: 73.756195
           dimension: 4500
-        - amplitude: 0.005274408
-          frequency: 119.26916
+        - amplitude: 0.007911612
+          frequency: 172.5895
           dimension: 5500
-        - amplitude: 0.0040401965
-          frequency: 279.0898
+        - amplitude: 0.006060295
+          frequency: 403.8594
           dimension: 6500
-        - amplitude: 0.0030947905
-          frequency: 653.0701
+        - amplitude: 0.0046421858
+          frequency: 945.03094
           dimension: 7500
-        - amplitude: 0.0023706094
-          frequency: 1528.1841
+        - amplitude: 0.0035559142
+          frequency: 2211.3723
           dimension: 8500
-        - amplitude: 0.0018158868
-          frequency: 3575.9507
+        - amplitude: 0.00272383
+          frequency: 5174.611
           dimension: 9500
       distortedNoiseSettings:
         center: {x: 0, y: 0, z: 0}
@@ -408,7 +408,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762935977246823
+        rid: 9134762950542491809
       layeredNoiseSettings:
         center: {x: 2.4, y: 0, z: 0}
         amplitude: 1.37
@@ -484,12 +484,12 @@ MonoBehaviour:
         sealevel: 0
         noiseLayers: []
   - enabled: 0
-    useMask: 0
-    showMask: 0
+    affectsOcean: 0
+    maskMode: 0
     noiseSettings:
       filterType: 2
       settings:
-        rid: 9134762935977246824
+        rid: 9134762950542491810
       layeredNoiseSettings:
         center: {x: 0, y: 0, z: 0}
         amplitude: 0.79
@@ -657,7 +657,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762935977246825
+        rid: 9134762950542491811
       layeredNoiseSettings:
         center: {x: 2.4, y: 0, z: 0}
         amplitude: 2.02
@@ -732,13 +732,13 @@ MonoBehaviour:
         stepSize: 0
         sealevel: 0
         noiseLayers: []
-  - enabled: 1
-    useMask: 1
-    showMask: 0
+  - enabled: 0
+    affectsOcean: 0
+    maskMode: 0
     noiseSettings:
       filterType: 1
       settings:
-        rid: 9134762935977246826
+        rid: 9134762950542491812
       layeredNoiseSettings:
         center: {x: 0, y: 0, z: 0}
         amplitude: 0.2
@@ -906,7 +906,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762935977246827
+        rid: 9134762950542491813
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 2.48}
         amplitude: 0.4
@@ -1011,324 +1011,165 @@ MonoBehaviour:
         stepSize: 0
         sealevel: 0
         noiseLayers: []
-  - enabled: 0
-    useMask: 0
-    showMask: 0
-    noiseSettings:
-      filterType: 0
-      settings:
-        rid: 9134762935977246828
-      layeredNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        sealevel: 0
-        noiseLayers:
-        - amplitude: 5
-          frequency: 0.2
-          dimension: 500
-        - amplitude: 2.5
-          frequency: 0.4
-          dimension: 1500
-        - amplitude: 1.25
-          frequency: 0.8
-          dimension: 2500
-        - amplitude: 0.625
-          frequency: 1.6
-          dimension: 3500
-        - amplitude: 0.3125
-          frequency: 3.2
-          dimension: 4500
-        - amplitude: 0.15625
-          frequency: 6.4
-          dimension: 5500
-        - amplitude: 0.078125
-          frequency: 12.8
-          dimension: 6500
-        - amplitude: 0.0390625
-          frequency: 25.6
-          dimension: 7500
-        - amplitude: 0.01953125
-          frequency: 51.2
-          dimension: 8500
-        - amplitude: 0.009765625
-          frequency: 102.4
-          dimension: 9500
-      rigidNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        sealevel: 0
-        noiseLayers: []
-      distortedNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        distortionCenter: {x: 0, y: 0, z: 0}
-        distortionAmplitude: 5
-        distortionFrequency: 0.2
-        distortionPersistance: 0.5
-        distortionLacunarity: 2
-        sealevel: 0
-        noiseLayers: []
-        distortionNoiseLayers: []
-      stepNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        stepCount: 0
-        stepSize: 0
-        sealevel: 0
-        noiseLayers: []
-    maskSettings:
-      filterType: 0
-      settings:
-        rid: 9134762935977246829
-      layeredNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        sealevel: 0
-        noiseLayers:
-        - amplitude: 5
-          frequency: 0.2
-          dimension: 500
-        - amplitude: 2.5
-          frequency: 0.4
-          dimension: 1500
-        - amplitude: 1.25
-          frequency: 0.8
-          dimension: 2500
-        - amplitude: 0.625
-          frequency: 1.6
-          dimension: 3500
-        - amplitude: 0.3125
-          frequency: 3.2
-          dimension: 4500
-        - amplitude: 0.15625
-          frequency: 6.4
-          dimension: 5500
-        - amplitude: 0.078125
-          frequency: 12.8
-          dimension: 6500
-        - amplitude: 0.0390625
-          frequency: 25.6
-          dimension: 7500
-        - amplitude: 0.01953125
-          frequency: 51.2
-          dimension: 8500
-        - amplitude: 0.009765625
-          frequency: 102.4
-          dimension: 9500
-      rigidNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        sealevel: 0
-        noiseLayers: []
-      distortedNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        distortionCenter: {x: 0, y: 0, z: 0}
-        distortionAmplitude: 5
-        distortionFrequency: 0.2
-        distortionPersistance: 0.5
-        distortionLacunarity: 2
-        sealevel: 0
-        noiseLayers: []
-        distortionNoiseLayers: []
-      stepNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        stepCount: 0
-        stepSize: 0
-        sealevel: 0
-        noiseLayers: []
   baseLayer:
     enabled: 1
-    useMask: 0
-    showMask: 0
+    affectsOcean: 1
+    maskMode: 0
     noiseSettings:
-      filterType: 0
+      filterType: 2
       settings:
-        rid: 9134762935977246820
+        rid: 9134762950542491815
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 2.48}
-        amplitude: 0.02
+        amplitude: 0.06
         frequency: 2.01
-        persistance: 0.513
-        lacunarity: 2.43
+        persistance: 0.484
+        lacunarity: 2.4
         noiseLayerCount: 6
         sealevel: 0.002
         noiseLayers:
-        - amplitude: 0.02
+        - amplitude: 0.06
           frequency: 2.01
           dimension: 500
-        - amplitude: 0.01026
-          frequency: 4.8843
+        - amplitude: 0.02904
+          frequency: 4.8240004
           dimension: 1500
-        - amplitude: 0.0052633802
-          frequency: 11.86885
+        - amplitude: 0.01405536
+          frequency: 11.577601
           dimension: 2500
-        - amplitude: 0.0027001142
-          frequency: 28.841305
+        - amplitude: 0.006802794
+          frequency: 27.786245
           dimension: 3500
-        - amplitude: 0.0013851586
-          frequency: 70.08437
+        - amplitude: 0.0032925522
+          frequency: 66.68699
           dimension: 4500
-        - amplitude: 0.0007105864
-          frequency: 170.30504
+        - amplitude: 0.0015935953
+          frequency: 160.04878
           dimension: 5500
-        - amplitude: 0.00036453083
-          frequency: 413.84125
+        - amplitude: 0.0007713001
+          frequency: 384.1171
           dimension: 6500
-        - amplitude: 0.00018700432
-          frequency: 1005.6343
+        - amplitude: 0.00037330925
+          frequency: 921.88104
           dimension: 7500
-        - amplitude: 0.00009593322
-          frequency: 2443.6914
+        - amplitude: 0.00018068167
+          frequency: 2212.5146
           dimension: 8500
-        - amplitude: 0.00004921374
-          frequency: 5938.1704
+        - amplitude: 0.00008744993
+          frequency: 5310.035
           dimension: 9500
       rigidNoiseSettings:
         center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
+        amplitude: 0.19
+        frequency: 4.25
+        persistance: 0.198
+        lacunarity: 3.6
+        noiseLayerCount: 4
         sealevel: 0
         noiseLayers:
-        - amplitude: 5
-          frequency: 0.2
+        - amplitude: 0.19
+          frequency: 4.25
           dimension: 500
-        - amplitude: 2.5
-          frequency: 0.4
+        - amplitude: 0.03762
+          frequency: 15.299999
           dimension: 1500
-        - amplitude: 1.25
-          frequency: 0.8
+        - amplitude: 0.00744876
+          frequency: 55.079994
           dimension: 2500
-        - amplitude: 0.625
-          frequency: 1.6
+        - amplitude: 0.0014748544
+          frequency: 198.28798
           dimension: 3500
-        - amplitude: 0.3125
-          frequency: 3.2
+        - amplitude: 0.00029202117
+          frequency: 713.83673
           dimension: 4500
-        - amplitude: 0.15625
-          frequency: 6.4
+        - amplitude: 0.00005782019
+          frequency: 2569.8123
           dimension: 5500
-        - amplitude: 0.078125
-          frequency: 12.8
+        - amplitude: 0.000011448397
+          frequency: 9251.324
           dimension: 6500
-        - amplitude: 0.0390625
-          frequency: 25.6
+        - amplitude: 0.0000022667828
+          frequency: 33304.766
           dimension: 7500
-        - amplitude: 0.01953125
-          frequency: 51.2
+        - amplitude: 0.000000448823
+          frequency: 119897.16
           dimension: 8500
-        - amplitude: 0.009765625
-          frequency: 102.4
+        - amplitude: 0.00000008886695
+          frequency: 431629.75
           dimension: 9500
       distortedNoiseSettings:
         center: {x: 12.24, y: 0, z: 0}
-        amplitude: 0.02
+        amplitude: 0.09
         frequency: 1.23
         persistance: 0.231
         lacunarity: 2.54
         noiseLayerCount: 5
         distortionCenter: {x: 0, y: 0, z: 0}
-        distortionAmplitude: 1.52
+        distortionAmplitude: 2.77
         distortionFrequency: 4.11
         distortionPersistance: 0.81
         distortionLacunarity: 2
         sealevel: 0
         noiseLayers:
-        - amplitude: 0.02
+        - amplitude: 0.09
           frequency: 1.23
           dimension: 500
-        - amplitude: 0.00462
+        - amplitude: 0.020790001
           frequency: 3.1242
           dimension: 1500
-        - amplitude: 0.00106722
+        - amplitude: 0.0048024906
           frequency: 7.935468
           dimension: 2500
-        - amplitude: 0.00024652784
+        - amplitude: 0.0011093754
           frequency: 20.15609
           dimension: 3500
-        - amplitude: 0.00005694793
+        - amplitude: 0.00025626572
           frequency: 51.19647
           dimension: 4500
-        - amplitude: 0.000013154972
+        - amplitude: 0.000059197384
           frequency: 130.03903
           dimension: 5500
-        - amplitude: 0.0000030387987
+        - amplitude: 0.000013674596
           frequency: 330.29913
           dimension: 6500
-        - amplitude: 0.0000007019625
+        - amplitude: 0.0000031588318
           frequency: 838.9598
           dimension: 7500
-        - amplitude: 0.00000016215334
+        - amplitude: 0.00000072969016
           frequency: 2130.9578
           dimension: 8500
-        - amplitude: 0.000000037457422
+        - amplitude: 0.00000016855843
           frequency: 5412.633
           dimension: 9500
         distortionNoiseLayers:
-        - amplitude: 1.52
+        - amplitude: 2.77
           frequency: 4.11
           dimension: 50500
-        - amplitude: 1.2312
+        - amplitude: 2.2437
           frequency: 8.22
           dimension: 51500
-        - amplitude: 0.997272
+        - amplitude: 1.817397
           frequency: 16.44
           dimension: 52500
-        - amplitude: 0.80779034
+        - amplitude: 1.4720916
           frequency: 32.88
           dimension: 53500
-        - amplitude: 0.65431017
+        - amplitude: 1.1923941
           frequency: 65.76
           dimension: 54500
-        - amplitude: 0.5299912
+        - amplitude: 0.96583927
           frequency: 131.52
           dimension: 55500
-        - amplitude: 0.4292929
+        - amplitude: 0.7823298
           frequency: 263.04
           dimension: 56500
-        - amplitude: 0.34772724
+        - amplitude: 0.63368714
           frequency: 526.08
           dimension: 57500
-        - amplitude: 0.28165907
+        - amplitude: 0.5132866
           frequency: 1052.16
           dimension: 58500
-        - amplitude: 0.22814384
+        - amplitude: 0.41576213
           frequency: 2104.32
           dimension: 59500
       stepNoiseSettings:
@@ -1375,7 +1216,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762935977246821
+        rid: 9134762950542491807
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 0}
         amplitude: 0.02
@@ -1452,12 +1293,12 @@ MonoBehaviour:
         noiseLayers: []
   layer01:
     enabled: 0
-    useMask: 0
-    showMask: 0
+    affectsOcean: 0
+    maskMode: 0
     noiseSettings:
       filterType: 1
       settings:
-        rid: 9134762935977246822
+        rid: 9134762950542491808
       layeredNoiseSettings:
         center: {x: -22.59, y: 0, z: 0}
         amplitude: 4.64
@@ -1499,42 +1340,42 @@ MonoBehaviour:
           dimension: 9500
       rigidNoiseSettings:
         center: {x: 0, y: 0, z: 0}
-        amplitude: 0.02
-        frequency: 1.7
+        amplitude: 0.03
+        frequency: 2.46
         persistance: 0.766
         lacunarity: 2.34
         noiseLayerCount: 5
         sealevel: 0.02
         noiseLayers:
-        - amplitude: 0.02
-          frequency: 1.7
+        - amplitude: 0.03
+          frequency: 2.46
           dimension: 500
-        - amplitude: 0.015319999
-          frequency: 3.978
+        - amplitude: 0.022979999
+          frequency: 5.7564
           dimension: 1500
-        - amplitude: 0.011735119
-          frequency: 9.308519
+        - amplitude: 0.017602678
+          frequency: 13.469975
           dimension: 2500
-        - amplitude: 0.0089891
-          frequency: 21.781935
+        - amplitude: 0.013483651
+          frequency: 31.519741
           dimension: 3500
-        - amplitude: 0.0068856506
-          frequency: 50.969727
+        - amplitude: 0.010328476
+          frequency: 73.756195
           dimension: 4500
-        - amplitude: 0.005274408
-          frequency: 119.26916
+        - amplitude: 0.007911612
+          frequency: 172.5895
           dimension: 5500
-        - amplitude: 0.0040401965
-          frequency: 279.0898
+        - amplitude: 0.006060295
+          frequency: 403.8594
           dimension: 6500
-        - amplitude: 0.0030947905
-          frequency: 653.0701
+        - amplitude: 0.0046421858
+          frequency: 945.03094
           dimension: 7500
-        - amplitude: 0.0023706094
-          frequency: 1528.1841
+        - amplitude: 0.0035559142
+          frequency: 2211.3723
           dimension: 8500
-        - amplitude: 0.0018158868
-          frequency: 3575.9507
+        - amplitude: 0.00272383
+          frequency: 5174.611
           dimension: 9500
       distortedNoiseSettings:
         center: {x: 0, y: 0, z: 0}
@@ -1565,7 +1406,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762935977246823
+        rid: 9134762950542491809
       layeredNoiseSettings:
         center: {x: 2.4, y: 0, z: 0}
         amplitude: 1.37
@@ -1642,12 +1483,12 @@ MonoBehaviour:
         noiseLayers: []
   layer02:
     enabled: 0
-    useMask: 0
-    showMask: 0
+    affectsOcean: 0
+    maskMode: 0
     noiseSettings:
       filterType: 2
       settings:
-        rid: 9134762935977246824
+        rid: 9134762950542491810
       layeredNoiseSettings:
         center: {x: 0, y: 0, z: 0}
         amplitude: 0.79
@@ -1815,7 +1656,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762935977246825
+        rid: 9134762950542491811
       layeredNoiseSettings:
         center: {x: 2.4, y: 0, z: 0}
         amplitude: 2.02
@@ -1891,13 +1732,13 @@ MonoBehaviour:
         sealevel: 0
         noiseLayers: []
   layer03:
-    enabled: 1
-    useMask: 1
-    showMask: 0
+    enabled: 0
+    affectsOcean: 0
+    maskMode: 0
     noiseSettings:
       filterType: 1
       settings:
-        rid: 9134762935977246826
+        rid: 9134762950542491812
       layeredNoiseSettings:
         center: {x: 0, y: 0, z: 0}
         amplitude: 0.2
@@ -2065,7 +1906,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762935977246827
+        rid: 9134762950542491813
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 2.48}
         amplitude: 0.4
@@ -2170,211 +2011,10 @@ MonoBehaviour:
         stepSize: 0
         sealevel: 0
         noiseLayers: []
-  layer04:
-    enabled: 0
-    useMask: 0
-    showMask: 0
-    noiseSettings:
-      filterType: 0
-      settings:
-        rid: 9134762935977246828
-      layeredNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        sealevel: 0
-        noiseLayers:
-        - amplitude: 5
-          frequency: 0.2
-          dimension: 500
-        - amplitude: 2.5
-          frequency: 0.4
-          dimension: 1500
-        - amplitude: 1.25
-          frequency: 0.8
-          dimension: 2500
-        - amplitude: 0.625
-          frequency: 1.6
-          dimension: 3500
-        - amplitude: 0.3125
-          frequency: 3.2
-          dimension: 4500
-        - amplitude: 0.15625
-          frequency: 6.4
-          dimension: 5500
-        - amplitude: 0.078125
-          frequency: 12.8
-          dimension: 6500
-        - amplitude: 0.0390625
-          frequency: 25.6
-          dimension: 7500
-        - amplitude: 0.01953125
-          frequency: 51.2
-          dimension: 8500
-        - amplitude: 0.009765625
-          frequency: 102.4
-          dimension: 9500
-      rigidNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        sealevel: 0
-        noiseLayers: []
-      distortedNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        distortionCenter: {x: 0, y: 0, z: 0}
-        distortionAmplitude: 5
-        distortionFrequency: 0.2
-        distortionPersistance: 0.5
-        distortionLacunarity: 2
-        sealevel: 0
-        noiseLayers: []
-        distortionNoiseLayers: []
-      stepNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        stepCount: 0
-        stepSize: 0
-        sealevel: 0
-        noiseLayers: []
-    maskSettings:
-      filterType: 0
-      settings:
-        rid: 9134762935977246829
-      layeredNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        sealevel: 0
-        noiseLayers:
-        - amplitude: 5
-          frequency: 0.2
-          dimension: 500
-        - amplitude: 2.5
-          frequency: 0.4
-          dimension: 1500
-        - amplitude: 1.25
-          frequency: 0.8
-          dimension: 2500
-        - amplitude: 0.625
-          frequency: 1.6
-          dimension: 3500
-        - amplitude: 0.3125
-          frequency: 3.2
-          dimension: 4500
-        - amplitude: 0.15625
-          frequency: 6.4
-          dimension: 5500
-        - amplitude: 0.078125
-          frequency: 12.8
-          dimension: 6500
-        - amplitude: 0.0390625
-          frequency: 25.6
-          dimension: 7500
-        - amplitude: 0.01953125
-          frequency: 51.2
-          dimension: 8500
-        - amplitude: 0.009765625
-          frequency: 102.4
-          dimension: 9500
-      rigidNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        sealevel: 0
-        noiseLayers: []
-      distortedNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        distortionCenter: {x: 0, y: 0, z: 0}
-        distortionAmplitude: 5
-        distortionFrequency: 0.2
-        distortionPersistance: 0.5
-        distortionLacunarity: 2
-        sealevel: 0
-        noiseLayers: []
-        distortionNoiseLayers: []
-      stepNoiseSettings:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        stepCount: 0
-        stepSize: 0
-        sealevel: 0
-        noiseLayers: []
   references:
     version: 2
     RefIds:
-    - rid: 9134762935977246820
-      type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
-      data:
-        center: {x: -0.94, y: 0, z: 2.48}
-        amplitude: 0.02
-        frequency: 2.01
-        persistance: 0.513
-        lacunarity: 2.43
-        noiseLayerCount: 6
-        sealevel: 0.002
-        noiseLayers:
-        - amplitude: 0.02
-          frequency: 2.01
-          dimension: 500
-        - amplitude: 0.01026
-          frequency: 4.8843
-          dimension: 1500
-        - amplitude: 0.0052633802
-          frequency: 11.86885
-          dimension: 2500
-        - amplitude: 0.0027001142
-          frequency: 28.841305
-          dimension: 3500
-        - amplitude: 0.0013851586
-          frequency: 70.08437
-          dimension: 4500
-        - amplitude: 0.0007105864
-          frequency: 170.30504
-          dimension: 5500
-        - amplitude: 0.00036453083
-          frequency: 413.84125
-          dimension: 6500
-        - amplitude: 0.00018700432
-          frequency: 1005.6343
-          dimension: 7500
-        - amplitude: 0.00009593322
-          frequency: 2443.6914
-          dimension: 8500
-        - amplitude: 0.00004921374
-          frequency: 5938.1704
-          dimension: 9500
-    - rid: 9134762935977246821
+    - rid: 9134762950542491807
       type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: -0.94, y: 0, z: 0}
@@ -2415,48 +2055,48 @@ MonoBehaviour:
         - amplitude: 0.0000390625
           frequency: 1029.12
           dimension: 9500
-    - rid: 9134762935977246822
+    - rid: 9134762950542491808
       type: {class: NoiseSettings/RigidNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: 0, y: 0, z: 0}
-        amplitude: 0.02
-        frequency: 1.7
+        amplitude: 0.03
+        frequency: 2.46
         persistance: 0.766
         lacunarity: 2.34
         noiseLayerCount: 5
         sealevel: 0.02
         noiseLayers:
-        - amplitude: 0.02
-          frequency: 1.7
+        - amplitude: 0.03
+          frequency: 2.46
           dimension: 500
-        - amplitude: 0.015319999
-          frequency: 3.978
+        - amplitude: 0.022979999
+          frequency: 5.7564
           dimension: 1500
-        - amplitude: 0.011735119
-          frequency: 9.308519
+        - amplitude: 0.017602678
+          frequency: 13.469975
           dimension: 2500
-        - amplitude: 0.0089891
-          frequency: 21.781935
+        - amplitude: 0.013483651
+          frequency: 31.519741
           dimension: 3500
-        - amplitude: 0.0068856506
-          frequency: 50.969727
+        - amplitude: 0.010328476
+          frequency: 73.756195
           dimension: 4500
-        - amplitude: 0.005274408
-          frequency: 119.26916
+        - amplitude: 0.007911612
+          frequency: 172.5895
           dimension: 5500
-        - amplitude: 0.0040401965
-          frequency: 279.0898
+        - amplitude: 0.006060295
+          frequency: 403.8594
           dimension: 6500
-        - amplitude: 0.0030947905
-          frequency: 653.0701
+        - amplitude: 0.0046421858
+          frequency: 945.03094
           dimension: 7500
-        - amplitude: 0.0023706094
-          frequency: 1528.1841
+        - amplitude: 0.0035559142
+          frequency: 2211.3723
           dimension: 8500
-        - amplitude: 0.0018158868
-          frequency: 3575.9507
+        - amplitude: 0.00272383
+          frequency: 5174.611
           dimension: 9500
-    - rid: 9134762935977246823
+    - rid: 9134762950542491809
       type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: 2.4, y: 0, z: 0}
@@ -2497,7 +2137,7 @@ MonoBehaviour:
         - amplitude: 0.00043876347
           frequency: 5341.328
           dimension: 9500
-    - rid: 9134762935977246824
+    - rid: 9134762950542491810
       type: {class: NoiseSettings/DistortedNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: 0, y: 0, z: 0}
@@ -2574,7 +2214,7 @@ MonoBehaviour:
         - amplitude: 38.54519
           frequency: 32.05207
           dimension: 59500
-    - rid: 9134762935977246825
+    - rid: 9134762950542491811
       type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: 2.4, y: 0, z: 0}
@@ -2615,7 +2255,7 @@ MonoBehaviour:
         - amplitude: 0.0039453125
           frequency: 1884.16
           dimension: 9500
-    - rid: 9134762935977246826
+    - rid: 9134762950542491812
       type: {class: NoiseSettings/RigidNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: -0.94, y: 0, z: 10.93}
@@ -2656,7 +2296,7 @@ MonoBehaviour:
         - amplitude: 0.004410136
           frequency: 49161.03
           dimension: 9500
-    - rid: 9134762935977246827
+    - rid: 9134762950542491813
       type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: -0.94, y: 0, z: 2.48}
@@ -2697,85 +2337,80 @@ MonoBehaviour:
         - amplitude: 0.0009842749
           frequency: 5938.1704
           dimension: 9500
-    - rid: 9134762935977246828
-      type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
+    - rid: 9134762950542491815
+      type: {class: NoiseSettings/DistortedNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
+        center: {x: 12.24, y: 0, z: 0}
+        amplitude: 0.09
+        frequency: 1.23
+        persistance: 0.231
+        lacunarity: 2.54
+        noiseLayerCount: 5
+        distortionCenter: {x: 0, y: 0, z: 0}
+        distortionAmplitude: 2.77
+        distortionFrequency: 4.11
+        distortionPersistance: 0.81
+        distortionLacunarity: 2
         sealevel: 0
         noiseLayers:
-        - amplitude: 5
-          frequency: 0.2
+        - amplitude: 0.09
+          frequency: 1.23
           dimension: 500
-        - amplitude: 2.5
-          frequency: 0.4
+        - amplitude: 0.020790001
+          frequency: 3.1242
           dimension: 1500
-        - amplitude: 1.25
-          frequency: 0.8
+        - amplitude: 0.0048024906
+          frequency: 7.935468
           dimension: 2500
-        - amplitude: 0.625
-          frequency: 1.6
+        - amplitude: 0.0011093754
+          frequency: 20.15609
           dimension: 3500
-        - amplitude: 0.3125
-          frequency: 3.2
+        - amplitude: 0.00025626572
+          frequency: 51.19647
           dimension: 4500
-        - amplitude: 0.15625
-          frequency: 6.4
+        - amplitude: 0.000059197384
+          frequency: 130.03903
           dimension: 5500
-        - amplitude: 0.078125
-          frequency: 12.8
+        - amplitude: 0.000013674596
+          frequency: 330.29913
           dimension: 6500
-        - amplitude: 0.0390625
-          frequency: 25.6
+        - amplitude: 0.0000031588318
+          frequency: 838.9598
           dimension: 7500
-        - amplitude: 0.01953125
-          frequency: 51.2
+        - amplitude: 0.00000072969016
+          frequency: 2130.9578
           dimension: 8500
-        - amplitude: 0.009765625
-          frequency: 102.4
+        - amplitude: 0.00000016855843
+          frequency: 5412.633
           dimension: 9500
-    - rid: 9134762935977246829
-      type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
-      data:
-        center: {x: 0, y: 0, z: 0}
-        amplitude: 5
-        frequency: 0.2
-        persistance: 0.5
-        lacunarity: 2
-        noiseLayerCount: 1
-        sealevel: 0
-        noiseLayers:
-        - amplitude: 5
-          frequency: 0.2
-          dimension: 500
-        - amplitude: 2.5
-          frequency: 0.4
-          dimension: 1500
-        - amplitude: 1.25
-          frequency: 0.8
-          dimension: 2500
-        - amplitude: 0.625
-          frequency: 1.6
-          dimension: 3500
-        - amplitude: 0.3125
-          frequency: 3.2
-          dimension: 4500
-        - amplitude: 0.15625
-          frequency: 6.4
-          dimension: 5500
-        - amplitude: 0.078125
-          frequency: 12.8
-          dimension: 6500
-        - amplitude: 0.0390625
-          frequency: 25.6
-          dimension: 7500
-        - amplitude: 0.01953125
-          frequency: 51.2
-          dimension: 8500
-        - amplitude: 0.009765625
-          frequency: 102.4
-          dimension: 9500
+        distortionNoiseLayers:
+        - amplitude: 2.77
+          frequency: 4.11
+          dimension: 50500
+        - amplitude: 2.2437
+          frequency: 8.22
+          dimension: 51500
+        - amplitude: 1.817397
+          frequency: 16.44
+          dimension: 52500
+        - amplitude: 1.4720916
+          frequency: 32.88
+          dimension: 53500
+        - amplitude: 1.1923941
+          frequency: 65.76
+          dimension: 54500
+        - amplitude: 0.96583927
+          frequency: 131.52
+          dimension: 55500
+        - amplitude: 0.7823298
+          frequency: 263.04
+          dimension: 56500
+        - amplitude: 0.63368714
+          frequency: 526.08
+          dimension: 57500
+        - amplitude: 0.5132866
+          frequency: 1052.16
+          dimension: 58500
+        - amplitude: 0.41576213
+          frequency: 2104.32
+          dimension: 59500
