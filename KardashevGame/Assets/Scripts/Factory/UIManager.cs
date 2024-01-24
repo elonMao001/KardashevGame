@@ -21,7 +21,6 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(uIopen);
         if (uIopen)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -30,6 +29,7 @@ public class UIManager : MonoBehaviour
                 uIopen = false;
                 openedFactory = null;
                 openendUI = null;
+                Builder.selected = 'I';
                 return;
             }
             else
@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
 
     void CheckRay() {
         RaycastHit hit;
-        if(uIopen || !Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+        if(uIopen || !Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100) || Builder.selected != 'i')
             return;
         if (hit.collider.gameObject.CompareTag("Factory"))
         {
@@ -72,8 +72,14 @@ public class UIManager : MonoBehaviour
 
         UI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = recipe.recipeRate + "s ";
         UI.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text = recipe.recipeName;
+
         CreateItemSlots(UI, "ItemSlotOutput", recipe.outputImages, recipe.outputNames, recipe.outputNumbers, 1);
-        CreateItemSlots(UI, "ItemSlotInput", recipe.inputImages, recipe.inputNames, recipe.inputNumbers, -1);
+        if (recipe.inputIDs.Length == 0) {
+            Destroy(UI.transform.GetChild(0).GetChild(3).gameObject);
+        } 
+        else {
+            CreateItemSlots(UI, "ItemSlotInput", recipe.inputImages, recipe.inputNames, recipe.inputNumbers, -1);
+        }
 
         UI.GetComponent<Canvas>().worldCamera = Camera.main;
 
@@ -81,7 +87,7 @@ public class UIManager : MonoBehaviour
         openendUI = UI;
     }
 
-private void CreateItemSlots(GameObject UI, string original, string[] images, string[] names, int[] numbers, float x)
+private void CreateItemSlots(GameObject UI, string original, string[] images, string[] names, int[] numbers, int x)
     {
         GameObject origPanel = null;
         for (int i = 0; i < UI.transform.GetChild(0).childCount; i++)
@@ -95,8 +101,7 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
         if (origPanel == null)
             return;
 
-        Debug.Log(images.Length);
-        origPanel.GetComponent<RectTransform>().localPosition = new Vector3(215 * x, (images.Length - 1) * 50, 0);
+        origPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(-135 * x, (images.Length - 1) * 50, 0);
         origPanel.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Goods Sprites/" + images[0]);
         origPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = names[0];
         origPanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = numbers[0] + "x ";
@@ -105,7 +110,7 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
             GameObject newPanel = Instantiate(origPanel);
             newPanel.transform.SetParent(UI.transform.GetChild(0));
             newPanel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            newPanel.GetComponent<RectTransform>().localPosition = new Vector3(215 * x, (images.Length - 1) * 50 - 100 * i, 0);
+            newPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(-135 * x, (images.Length - 1) * 50 - 100 * i, 0);
             newPanel.GetComponent<RectTransform>().localEulerAngles = new Vector3(0, 0, 0);
             newPanel.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Goods Sprites/" + images[i]);
             newPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = names[i];
@@ -120,7 +125,7 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
         int[] possibleRecipes = DataManager.GetRecipesForFactory(factory.GetComponent<Factory>().me);
         GameObject UI = Instantiate(selectRecipeUI);
         GameObject origPanel = UI.transform.GetChild(0).GetChild(0).gameObject;
-        origPanel.GetComponent<RectTransform>().localPosition = new Vector3(-215, 150, 0);
+        origPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(130, -100, 0);
         origPanel.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Goods Sprites/" + DataManager.GetNOutputImage(possibleRecipes[0], 0));
         origPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = DataManager.GetRecipeName(possibleRecipes[0]);
         origPanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = DataManager.GetNOutputNumber(possibleRecipes[0], 0) + "x in " + DataManager.GetRecipeDuration(possibleRecipes[0]) + "s";
@@ -129,7 +134,7 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
             GameObject newPanel = Instantiate(origPanel);
             newPanel.transform.SetParent(UI.transform.GetChild(0));
             newPanel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            newPanel.GetComponent<RectTransform>().localPosition = new Vector3(-215 + 225 * (i/4), 150 - i * 80 + 400 * (i/4), 0);
+            newPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(130 + 225 * (i/4), -100 - i * 80 + 400 * (i/4), 0);
             newPanel.GetComponent<RectTransform>().localEulerAngles = new Vector3(0, 0, 0);
             newPanel.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Goods Sprites/" + DataManager.GetNOutputImage(possibleRecipes[i], 0));
             newPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = DataManager.GetRecipeName(possibleRecipes[i]);
@@ -152,12 +157,14 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
         Transform background = openendUI.transform.GetChild(0);
 
         string s;
-        for (int i = 3; i < recipe.inputIDs.Length + 3; i++)
-        {
-            s = background.GetChild(i).GetChild(2).GetComponent<TextMeshProUGUI>().text;
-            s = s.Split(" ")[0];
-            s += " (" + Support.ResizeArray(factory.inputGoods[i - 3], null).Length + ")"; //Kann vereinfacht werden
-            background.GetChild(i).GetChild(2).GetComponent<TextMeshProUGUI>().text = s;
+        if (recipe.inputIDs.Length != 0) {
+            for (int i = 3; i < recipe.inputIDs.Length + 3; i++)
+            {
+                s = background.GetChild(i).GetChild(2).GetComponent<TextMeshProUGUI>().text;
+                s = s.Split(" ")[0];
+                s += " (" + Support.ResizeArray(factory.inputGoods[i - 3], null).Length + ")"; //Kann vereinfacht werden
+                background.GetChild(i).GetChild(2).GetComponent<TextMeshProUGUI>().text = s;
+            }
         }
         
         for(int i = 3 + recipe.inputIDs.Length; i < recipe.inputIDs.Length + 3 + recipe.outputIDs.Length; i++)

@@ -1,8 +1,35 @@
-0  Stone Axe  2  0  1  1  2  1  9  1  3  30   
-1  Iron Axe  2  2  1  1  2  1  10  1  4  45   
+0  Stone Axe  2  0  2  22  1  1  9  1  3  40   
+1  Iron Axe  2  42  1  22  1  1  10  1  3  30   
 2  Weird Orb  4  11  3  13  1  14  8  15  6  1  12  1  5  80   
 3  Water Extraction  0  1  19  5  1  0,5   
 4  Spare-Parts-Cycle  2  13  1  15  2  1  17  12  3  20   
 5  Mostly Water  1  14  5  1  19  2  2  8   
 6  DIY Traffic Light  3  17  3  15  1  12  3  1  16  1  4  60   
-7  Greenhouse  2  19  20  18  5  1  14  40  3  120
+7  Greenhouse  2  19  20  18  5  1  14  40  3  120   
+8  Dirt Extraction  0  1  20  5  1  0,5   
+9  Stone Extraction  0  1  0  5  1  0,5   
+10  Iron Refinement  1  0  5  1  2  3  2  1   
+11  Stone Shredding  1  0  1  1  23  10  2  0,5   
+12  Gold Refinement  1  0  50  1  24  1  2  30   
+13  Copper Refinement  1  0  10  1  25  5  2  5   
+14  Photosynthesis  2  19  80  20  10  1  21  1  3  60   
+15  100 years  2  19  40  21  1  1  26  100  3  100   
+16  Important Print  1  31  100  1  33  1  2  100   
+17  Branches  1  21  1  1  22  10  2  20   
+18  Simple Lumbering  2  9  3  21  1  1  1  50  3  120   
+19  Better Lumbering  2  10  2  21  1  1  1  70  3  60   
+20  Charcoal  1  1  10  1  27  2  2  30   
+21  Oil Pressing  1  26  100  1  28  10  2  10   
+22  Rare Dirt  2  20  25  0  25  1  29  5  3  20   
+23  Iron Smelting  2  2  10  27  3  1  42  5  3  15   
+24  Gold Smelting  2  24  10  27  4  1  30  4  3  15   
+25  Copper Smelting  2  31  10  27  3  1  31  5  3  15   
+26  Quarz Smelting  2  23  20  27  10  1  32  10  3  25   
+27  Breadboards & co.  3  31  5  42  1  23  2  1  34  5  4  10   
+28  Transistors & Diodes  2  34  20  29  5  1  35  2  3  30   
+29  Extractor  3  0  40  42  10  34  10  1  37  1  4  60   
+30  Refinery  4  42  20  28  8  34  20  32  10  1  38  1  5  80   
+31  Small Factory  3  28  10  42  30  35  4  1  39  4  100   
+32  Medium Factory  4  31  40  42  40  32  15  35  10  1  40  5  120   
+33  Large Factory  5  32  30  34  80  35  20  30  20  42  50  1  41  1  140   
+34  Flexxxxing  2  30  100  35  100  1  36  1  3  1000   

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Factory : MonoBehaviour
 {
+    public int FACTORYCAPACITY = 100;
+
     public Good[][] outputGoods;
     public int[] outputGoodsFill;
     public Good[][] inputGoods;
@@ -66,7 +68,7 @@ public class Factory : MonoBehaviour
         }
         for (int i = 0; i < outputGoodsFill.Length; i++)
         {
-            if (inputGoodsFill[i] + recipe.outputNumbers[i] >= 100)
+            if (outputGoodsFill[i] + recipe.outputNumbers[i] > FACTORYCAPACITY)
                 return true;
         }
         return false;
@@ -93,9 +95,9 @@ public class Factory : MonoBehaviour
         for (int i = 0; i < Mathf.Max(inputSize, outputSize); i++)
         {
             if (i < inputSize)
-                inputGoods[i] = new Good[100];
+                inputGoods[i] = new Good[FACTORYCAPACITY];
             if (i < outputSize)
-                outputGoods[i] = new Good[100];
+                outputGoods[i] = new Good[FACTORYCAPACITY];
         }
     }
 
@@ -103,19 +105,22 @@ public class Factory : MonoBehaviour
         return recipe;
     }
 
-    private void AddGoods(Good[] goods, int fill, int amount, int good)
+    public static void AddGoods(Good[] goods, int fill, int amount, int good)
     {
         for (int i = fill; i < fill + amount; i++) {
             goods[i] = new Good(good);
         }
     }
 
-    private void SubtractGoods(Good[] goods, int fill, int amount)
+    public static Good SubtractGoods(Good[] goods, int fill, int amount)
     {
         for(int i = fill - amount; i < fill; i++)
         {
+            Good g = goods[i];
             goods[i] = null;
+            return g;
         }
+        return null;
     }
 
     public Vector3 GetClosestAccess(Vector3 point, out bool isOut) {

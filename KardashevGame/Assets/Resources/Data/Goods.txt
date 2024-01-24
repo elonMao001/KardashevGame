@@ -1,14 +1,14 @@
-0  Stone  Stone.jpg   
-1  Wood  Wood.jpg   
-2  Iron  Iron.jpg   
+0  Stone  Stone   
+1  Wood  Wood   
+2  Iron Ore  IronOre   
 3  Plutonium  Pluto.jpg   
 4  Magma  Magma.jpg   
 5  Salt  Salt.jpg   
 6  Oxygen  Oxygen.jpg   
 7  LaserCrystals  LaserC.jpg   
 8  DysonSphereParts  DysonParts.jpg   
-9  Stone Axe  StoneAxe.jpg   
-10  Iron Axe  IronAxe.jpg   
+9  Stone Axe  StoneAxe   
+10  Iron Axe  IronAxe   
 11  Bean  Bohne   
 12  Orb  Orb   
 13  Space-Shuttle  Space   
@@ -18,3 +18,26 @@
 17  Bicycle  Fahrrad   
 18  Light Bulb  Glühbirne   
 19  Water  Water   
+20  Dirt  Dirt   
+21  Tree  Tree   
+22  Stick  Stick   
+23  Sand  Sand   
+24  Gold Ore  GoldOre   
+25  Copper Ore  CopperOre   
+26  Olives  Olives   
+27  Charcoal  Coal   
+28  Oil  Oil   
+29  Rare Earths  RareEarths   
+30  Gold Ingot  GoldIngot   
+31  Copper Ingot  CopperIngot   
+32  Glass  Glass   
+33  Credits  Credits   
+34  Simple Electronics  Diode   
+35  Advanced Electronics  Transistor   
+36  Poser Electronics  PoserElectronics   
+37  Extractor  Extractor   
+38  Refinery  Refinery   
+39  Small Factory  SmallFactory   
+40  Medium Factory  MediumFactory   
+41  Large Factory  LargeFactory   
+42  Iron Ingot  IronIngot   
