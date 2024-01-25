@@ -9,8 +9,8 @@ public class UIManager : MonoBehaviour
 {
     public GameObject factoryUI;
     public GameObject selectRecipeUI;
-    public bool uIopen = false;
 
+    public bool uIopen = false;
     GameObject openedFactory = null;
     GameObject openendUI = null;
 
@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
                 uIopen = false;
                 openedFactory = null;
                 openendUI = null;
-                Builder.selected = 'I';
+                Builder.selected = 'i';
                 return;
             }
             else
@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //Führt einen RayCast durch und überprüft, ob eine Fabrik geöffnet werden soll
     void CheckRay() {
         RaycastHit hit;
         if(uIopen || !Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100) || Builder.selected != 'i')
@@ -56,6 +57,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //Öffnet eine Fabrik und zeigt je nach Rezeptstatus eines von zwei Layouts an
     void OpenUI(GameObject factory)
     {
         uIopen = true;
@@ -87,7 +89,8 @@ public class UIManager : MonoBehaviour
         openendUI = UI;
     }
 
-private void CreateItemSlots(GameObject UI, string original, string[] images, string[] names, int[] numbers, int x)
+    //Aus Redudanzgründen lasse ich sowohl Input- als auch Output-Slots in einer separaten Methode anfertigen
+    private void CreateItemSlots(GameObject UI, string original, string[] images, string[] names, int[] numbers, int x)
     {
         GameObject origPanel = null;
         for (int i = 0; i < UI.transform.GetChild(0).childCount; i++)
@@ -110,7 +113,8 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
             GameObject newPanel = Instantiate(origPanel);
             newPanel.transform.SetParent(UI.transform.GetChild(0));
             newPanel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            newPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(-135 * x, (images.Length - 1) * 50 - 100 * i, 0);
+            newPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+            newPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(-135 * x, (images.Length - 1) * 50 - 100 * i);
             newPanel.GetComponent<RectTransform>().localEulerAngles = new Vector3(0, 0, 0);
             newPanel.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Goods Sprites/" + images[i]);
             newPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = names[i];
@@ -120,6 +124,7 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
         }
     }
 
+    //Das Alternativlayout für den Fall, dass noch kein Rezept ausgewählt wurde (Ähnlich aufgebaut wie oben)
     void OpenRecipeSelect(GameObject factory) {
         CloseUI();
         int[] possibleRecipes = DataManager.GetRecipesForFactory(factory.GetComponent<Factory>().me);
@@ -134,7 +139,7 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
             GameObject newPanel = Instantiate(origPanel);
             newPanel.transform.SetParent(UI.transform.GetChild(0));
             newPanel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            newPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(130 + 225 * (i/4), -100 - i * 80 + 400 * (i/4), 0);
+            newPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(130 + 225 * (i/5), -100 - i * 80 + 400 * (i/5), 0);
             newPanel.GetComponent<RectTransform>().localEulerAngles = new Vector3(0, 0, 0);
             newPanel.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Goods Sprites/" + DataManager.GetNOutputImage(possibleRecipes[i], 0));
             newPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = DataManager.GetRecipeName(possibleRecipes[i]);
@@ -148,6 +153,7 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
         openendUI = UI;
     }
 
+    //Pro Frame wird der Text für die Anzahl jedes Good und Rezeptsekunden aktualisiert
     void UpdateProgressAndCounts()
     {
         Factory factory = openedFactory.GetComponent<Factory>();
@@ -180,12 +186,13 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
         s += " (" + (int) factory.progress + "s)";
         background.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = s;
 
-        background.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1) * factory.progress / recipe.recipeRate;
+        background.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 0) * factory.progress / recipe.recipeRate;
         Color c = background.GetChild(0).GetComponent<Image>().color;
         c = new Color(c.r, c.g, c.b, 255);
         background.GetChild(0).GetComponent<Image>().color = c;
     }
 
+    //Eine nur von außen aktivierte Methode, durch die die Klasse SelectButton die UI verändern kann
     public void RecipeButtonPressed(int button)
     {
         openedFactory.GetComponent<Factory>().SetRecipe(DataManager.GetRecipesForFactory(openedFactory.GetComponent<Factory>().me)[button]);
@@ -193,12 +200,14 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
         OpenUI(openedFactory);
     }
 
+    //Ebenfalls nur für die Selectbutton-Klasse
     public void SelectButtonPressed()
     {
         CloseUI();
         OpenRecipeSelect(openedFactory);
     }
 
+    //Schließt alle geöffneten UI-Elemente außer das Inventory. Ändert keine Klassenvariablen, da oft mitdenselben direkt ein anderes UI geöffnet wird
     void CloseUI() {
         if (uIopen)
         {

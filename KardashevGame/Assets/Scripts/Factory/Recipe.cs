@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Die Recipe-Klasse speichert Rezepte, damit man die darin enthaltenen Informationen nicht dauerhaft aus Text-Files herauslesen muss
 public class Recipe
 {
     public int[] inputIDs;
