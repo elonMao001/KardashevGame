@@ -15,18 +15,14 @@ namespace PlanetGeneration {
 
         [HideInInspector]
         public TerrainLayer[] terrainLayers;
-        public TerrainLayer baseLayer, layer01, layer02, layer03, layer04;
+        public TerrainLayer baseLayer, layer01, layer02, layer03;
 
         public ReorderableList reorderableList;
 
         public void Init() {
-            terrainLayers = new TerrainLayer[5];
-
-            terrainLayers[0] = baseLayer;
-            terrainLayers[1] = layer01;
-            terrainLayers[2] = layer02;
-            terrainLayers[3] = layer03;
-            terrainLayers[4] = layer04;
+            terrainLayers = new TerrainLayer[] {
+                baseLayer, layer01, layer02, layer03
+            };
 
             for (int i = 0; i < terrainLayers.Length; i++) {
                 if (terrainLayers[i] == null) {
@@ -37,7 +33,7 @@ namespace PlanetGeneration {
         }
 
         public void InitTerrainLayers() {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < terrainLayers.Length; i++) {
                 terrainLayers[i].noiseSettings.Init();
                 terrainLayers[i].maskSettings.Init();
             }
@@ -45,7 +41,11 @@ namespace PlanetGeneration {
 
         [Serializable]
         public class TerrainLayer {
-            public bool enabled, useMask, showMask;
+            public enum MaskMode {
+                None, UseBase, UseCustom, ShowCustom
+            }
+            public bool enabled, affectsOcean;
+            public MaskMode maskMode;
             public NoiseSettings noiseSettings;
             public NoiseSettings maskSettings;
 

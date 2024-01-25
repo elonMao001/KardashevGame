@@ -28,21 +28,38 @@ namespace PlanetGeneration.TerrainGeneration {
 
         public Vector3 GetPosition(Vector3 pointOnUnitSphere, bool addToMinMax) {
             float amplitude = 0;
+
+            float baseMask = terrainBundles[0].terrainFilter.GetAmplitude(pointOnUnitSphere);
             
-            for (int i = 0; i < terrainBundles.Length; i++) {
+            for (int i = 1; i < terrainBundles.Length; i++)
                 if (shapeSettings.terrainLayers[i].enabled) {
-                    if (shapeSettings.terrainLayers[i].showMask) {
+                    if (shapeSettings.terrainLayers[i].maskMode == TerrainLayer.MaskMode.ShowCustom) {
                         amplitude += terrainBundles[i].mask.GetAmplitude(pointOnUnitSphere);
                     } else {
                         float currentAmplitude = terrainBundles[i].terrainFilter.GetAmplitude(pointOnUnitSphere);
 
-                        if (shapeSettings.terrainLayers[i].useMask)
-                            currentAmplitude *= Max(0, terrainBundles[i].mask.GetAmplitude(pointOnUnitSphere));
+                        if (shapeSettings.terrainLayers[i].affectsOcean || currentAmplitude >= 0) {
 
-                        if (i == 0 || currentAmplitude > 0)
-                            amplitude += currentAmplitude;
-                    }   
+                            switch (shapeSettings.terrainLayers[i].maskMode) {
+                                case TerrainLayer.MaskMode.None:
+                                    amplitude += currentAmplitude;
+                                    break;
+                                case TerrainLayer.MaskMode.UseBase:
+                                    amplitude += currentAmplitude * Max(0, baseMask);
+                                    break;
+                                case TerrainLayer.MaskMode.UseCustom:
+                                    amplitude += currentAmplitude * Max(0, terrainBundles[i].mask.GetAmplitude(pointOnUnitSphere));
+                                    break;
+                                default: break;
+                            }
+                        }   
+                    }
                 }
+
+            if (shapeSettings.terrainLayers[0].enabled) {
+                if (!shapeSettings.terrainLayers[0].affectsOcean)
+                    baseMask = Max(0, baseMask);
+                amplitude += baseMask;
             }
 
             if (amplitude < 0)
