@@ -6,14 +6,12 @@ using UnityEngine;
 
 public class Builder : MonoBehaviour
 {
-    static public char selected = 'i';
+    static public char selected = '0';
     static public char[] existingKeys = { 'i', 'f', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 
     public GameObject[] defaultBuildings = new GameObject[4];
     public GameObject inventory;
-
-    bool waiting;
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +22,14 @@ public class Builder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.anyKeyDown)
+            //CheckSelection();
         if (Input.GetMouseButtonDown(0))
         {
             CheckRay();
         }
     }
-
-    //Führt einen Raycast aus um nach einem geeigneten Ort für das ausgewählte Gebäude zu suchen oder ein bereits vorhandenes abzureißen
+    
     void CheckRay()
     {
         RaycastHit hit;
@@ -39,20 +38,15 @@ public class Builder : MonoBehaviour
 
         if (hit.collider.gameObject.CompareTag("Ground") || selected == '0')
         {
-            if (selected != '0') {
+            if (selected != 0) { 
                 ConstructFactory(hit);
-            } else if(!waiting)
+            } else
             {
                 StartCoroutine(ConstructConveyor(hit));
             }
-            return;
-        }
-        if ((hit.collider.gameObject.CompareTag("Factory") || hit.collider.gameObject.CompareTag("Conveyor")) && selected == 'f') {
-            RemoveBuilding(hit.collider.gameObject);
         }
     }
 
-    //Erstellt aus einem der 3d-Modelle eine neue Fabrik und platziert diese am Ort des Raycasthits
     void ConstructFactory(RaycastHit hit)
     {
         GameObject g = Instantiate(defaultBuildings[selected - '0']);
@@ -63,44 +57,37 @@ public class Builder : MonoBehaviour
         g.tag = "Factory";
 
         g.transform.position = hit.point + new Vector3(0, 0, 0);
-        g.transform.localScale = new Vector3(1, 1, 1) / 3;
+        g.transform.localScale = new Vector3(1, 1, 1);
         g.transform.Rotate(new Vector3(90, transform.rotation.eulerAngles.y, 0));
 
         g.GetComponent<Factory>().Init(selected - '0');
     }
 
-    //Wandelt das berechnete Conveyor in ein neues Szenenobjekt um
     void DrawConveyor(Conveyor c)
     {
         GameObject g = Instantiate(defaultBuildings[0]);
-        g.AddComponent<ConveyorCheater>().conveyor = c;
 
         g.transform.position = (c.inputPos + c.outputPos) / 2;
-        Debug.Log(g.transform.position);
-        g.transform.localScale = new Vector3(1, 1, c.length / 5 * 10) / 10;
+        g.transform.localScale = new Vector3(1, 1, c.length / 5) / 10;
 
         // Calculate rotation based on the direction from inputPos to outputPos
         Vector3 direction = c.outputPos - c.inputPos;
         Quaternion rotation = Quaternion.LookRotation(direction);
 
+        // Apply the rotation to the GameObject
         g.transform.rotation = rotation;
 
 
+
         g.name = "Conveyor";
-        g.tag = "Conveyor";
     }
 
-    //Wartet auf zwei Maus-Klicks um dann ein neues Conveyor zwischen den Punkten und oder Fabriken zu erstellen
     private IEnumerator ConstructConveyor(RaycastHit hit1)
     {
         while (true)
         {
             yield return null;
-            waiting = true;
             yield return new WaitForNextMouseClick();
-            waiting = false;
-
-
             RaycastHit hit2;
             if (!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit2, 100))
             {
@@ -109,18 +96,16 @@ public class Builder : MonoBehaviour
 
 
             Conveyor c;
-            if (hit1.collider.gameObject.CompareTag("Factory"))
+            if (hit1.collider.gameObject.CompareTag("factory"))
             {
                 Factory f1 = hit1.collider.gameObject.GetComponent<Factory>();
                 Vector3 v1 = f1.GetClosestAccess(hit1.point, out bool isOut);
-                Debug.Log(v1);
 
-                if (hit2.collider.gameObject.CompareTag("Factory"))
+                if (hit2.collider.gameObject.CompareTag("factory"))
                 {
                     Factory f2 = hit2.collider.gameObject.GetComponent<Factory>();
                     if (isOut)
                     {
-                        Debug.Log(f2.GetClosestOutput(hit2.point));
                         c = new Conveyor(/*speed*/ 10, v1, f2.GetClosestOutput(hit2.point), f2, f1);
                     }
                     else
@@ -144,7 +129,7 @@ public class Builder : MonoBehaviour
             }
             else
             {
-                if (hit2.collider.gameObject.CompareTag("Factory"))
+                if (hit2.collider.gameObject.CompareTag("factory"))
                 {
                     Factory f2 = hit2.collider.gameObject.GetComponent<Factory>();
                     Vector3 v2 = f2.GetClosestAccess(hit2.point, out bool isOut);
@@ -166,26 +151,18 @@ public class Builder : MonoBehaviour
         }
     }
 
-    //Zerstört eine angeklickte Fabrik
-    void RemoveBuilding(GameObject building)
-    {
-        Destroy(building);
-        gameObject.GetComponent<UIManager>().uIopen = false;
-    }
-
-    //Wird aufgerufe, wenn Unity irgendein GUI-Event erfährt
     private void OnGUI()
     {
         CheckSelection();
     }
 
-    //Überprüft ob man das erhaltene Event zu einem der selected-Werte umwandeln kann
-    //Der lange Anhang war ein freundlich gemeinter Autofill-Vorfall (Er wird in unserer Zeilenzahl nicht berücksichtigt (Es sind 717))
     void CheckSelection()  // highly inefficient upon expansion
     {
         Event e = Event.current;
         if (e.type != EventType.KeyDown || e.character == selected || !Support.ArrayContains(existingKeys, e.character))
             return;
+        Debug.Log("here");
+        Debug.Log(e.character + " " + selected);
         if (e.character == 'i')
         {
             inventory.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = new Vector4(200, 100, 100, 255);
@@ -197,6 +174,7 @@ public class Builder : MonoBehaviour
             {
                 inventory.transform.GetChild(0).GetChild(selected - '0' + 1).GetComponent<Image>().color = new Vector4(200, 100, 100, 255);
             }
+            Debug.Log(inventory.transform.GetChild(0).GetChild(0).GetComponent<Image>().color);
         } else if(e.character == 'f')
         {
             inventory.transform.GetChild(0).GetChild(13).GetComponent<Image>().color = new Vector4(200, 100, 100, 255);
@@ -223,7 +201,6 @@ public class Builder : MonoBehaviour
         }
 
         selected = e.character;
-        Debug.Log(selected);
         return;
         switch (e.keyCode)
         {

@@ -16,7 +16,7 @@ namespace PlanetGeneration.Chunks {
         };
         
         private TerrainGenerator terrainGenerator;
-        private int[] universalTriangles = new int[Chunk.IndexCount];
+        public int[] universalTriangles = new int[Chunk.IndexCount];
         
         public CubeSphere(TerrainGenerator terrainGenerator) {
             if (Chunk.Resolution % 2 != 0)

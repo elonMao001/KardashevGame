@@ -1,14 +1,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using PlanetGeneration;
 using PlanetGeneration.Chunks;
 using PlanetGeneration.TerrainGeneration;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlanetGenerator : MonoBehaviour {
@@ -16,6 +12,8 @@ public class PlanetGenerator : MonoBehaviour {
 
     [SerializeField]
     private Transform chunkPrefab;
+    [SerializeField]
+    private Transform ocean;
 
     public Transform observer;
 
@@ -23,6 +21,9 @@ public class PlanetGenerator : MonoBehaviour {
     public ColorSettings colorSettings;
 
     [Header("Settings")]
+
+    [SerializeField]
+    private float rotationSpeed;
 
     [SerializeField]
     private bool testPlanet;
@@ -33,7 +34,7 @@ public class PlanetGenerator : MonoBehaviour {
     private TestMode lastTestMode;
     [Flags]
     public enum TestMode {
-        Nothing = 0, Right = 1, Top = 2, Front = 4, Back = 8, Bottom = 16, Left = 32
+        Off = 0, Right = 1, Top = 2, Front = 4, Back = 8, Bottom = 16, Left = 32
     }
 
     private TerrainGenerator terrainGenerator;
@@ -51,9 +52,13 @@ public class PlanetGenerator : MonoBehaviour {
 
     [Range(0.01f, 1f)]
     public float maxChunkViewPercentage;
+
+    [SerializeField, Range(1, 50)]
+    private int chunkTestIts;
     
     void Start() { 
         chunkPrefab.GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
+        ocean.transform.localScale = 2f * transform.localScale * shapeSettings.radius;
 
         levels = new Transform[maxDepth + 1];
         for (int i = 0; i < levels.Length; i++) {
@@ -74,6 +79,9 @@ public class PlanetGenerator : MonoBehaviour {
         colorGenerator.UpdateSurfaceGradient();
         colorGenerator.UpdateOceanfloorGradient();
         colorGenerator.UpdatePlanetRadius(shapeSettings.radius);
+
+        cubeSphere.faces[0].SubDivide();
+        cubeSphere.GenerateSubChunk(cubeSphere.faces[0].subChunks[0]);
     }
 
     private void Update() {
@@ -85,9 +93,10 @@ public class PlanetGenerator : MonoBehaviour {
                 lastTestMode = testMode;
                 testPlanetInited = true;
             }
-
             if (shapeNeedsUpdating && updateCounter > updateDelay) { 
                 UpdateShape();
+
+                ocean.transform.localScale = 2f * transform.localScale * shapeSettings.radius;
 
                 shapeNeedsUpdating = false;
                 updateCounter = 0;
@@ -98,6 +107,8 @@ public class PlanetGenerator : MonoBehaviour {
 
             updateCounter = 0;
         }
+
+        transform.localEulerAngles += new Vector3(0, rotationSpeed * Time.deltaTime, 0);
 
         updateCounter += Time.deltaTime;
     }
@@ -159,6 +170,22 @@ public class PlanetGenerator : MonoBehaviour {
         
         colorGenerator.UpdateSurfaceGradient();
         colorGenerator.UpdateOceanfloorGradient();
+    }
+
+    public void TestFaceGeneration() {
+        float time = Time.realtimeSinceStartup;
+        for (int i = 0; i < chunkTestIts; i++) {
+            cubeSphere.faces[0].GenerateFace(terrainGenerator, cubeSphere.universalTriangles);
+        }
+        Debug.Log((Time.realtimeSinceStartup - time) / chunkTestIts);
+    }
+
+    public void TestSubChunkGeneration() {
+        float time = Time.realtimeSinceStartup;
+        for (int i = 0; i < chunkTestIts; i++) {
+            cubeSphere.faces[0].subChunks[0].Generate(terrainGenerator, cubeSphere.universalTriangles);
+        }
+        Debug.Log((Time.realtimeSinceStartup - time) / chunkTestIts);
     }
 
     public float GetRadius() {

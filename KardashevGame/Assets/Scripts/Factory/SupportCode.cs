@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Diese CustomYieldInstruction wird benötigt, da das Erstellen neuer Conveyors zwei Maus-Klicks benötigt
 public class WaitForNextMouseClick : CustomYieldInstruction
 {
     public override bool keepWaiting
@@ -18,7 +17,6 @@ public class WaitForNextMouseClick : CustomYieldInstruction
 
 public static class Support
 {
-    //Aus einem Array wird ein neues erstellt, das keine nullInt-Werte (oft -1 oder 0) enthält. Benutzt um NullpointerExceptions zu vermeiden
     public static int[] ResizeArray(int[] array, int nullInt)
     {
         int size = ArrayFill(array, nullInt);
@@ -39,7 +37,6 @@ public static class Support
         return ret;
     }
 
-    //Sagt wie viele Werte eines arrays nicht dem nullInt-Wert entsprechen
     public static int ArrayFill(int[] array, int nullInt)
     {
         int size = 0;
@@ -82,7 +79,6 @@ public static class Support
         return size;
     }
 
-    //Überprüft ob einer der Werte aus array dem Wert test entspricht
     public static bool ArrayContains(char[] array, char test)
     {
         foreach (char c in array)

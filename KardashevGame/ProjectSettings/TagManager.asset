@@ -7,7 +7,6 @@ TagManager:
   - UI
   - Ground
   - Factory
-  - Conveyor
   layers:
   - Default
   - TransparentFX
