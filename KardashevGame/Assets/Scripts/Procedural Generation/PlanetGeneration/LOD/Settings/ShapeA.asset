@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f403e66184b614a4796d4a088724e7d2, type: 3}
   m_Name: ShapeA
   m_EditorClassIdentifier: 
-  radius: 7.57
-  seaDepth: 2.51
+  radius: 1
+  seaDepth: 0
   terrainLayers:
-  - enabled: 1
+  - enabled: 0
     affectsOcean: 1
     maskMode: 0
     noiseSettings:
       filterType: 0
       settings:
-        rid: 9134762999485562888
+        rid: 9134763016859680976
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 2.48}
         amplitude: 0.06
@@ -219,7 +219,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762999485562889
+        rid: 9134763016859680977
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 0}
         amplitude: 0.02
@@ -294,13 +294,13 @@ MonoBehaviour:
         stepSize: 0
         sealevel: 0
         noiseLayers: []
-  - enabled: 1
+  - enabled: 0
     affectsOcean: 0
     maskMode: 0
     noiseSettings:
       filterType: 1
       settings:
-        rid: 9134762999485562890
+        rid: 9134763016859680978
       layeredNoiseSettings:
         center: {x: -22.59, y: 0, z: 0}
         amplitude: 4.64
@@ -408,7 +408,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762999485562891
+        rid: 9134763016859680979
       layeredNoiseSettings:
         center: {x: 2.4, y: 0, z: 0}
         amplitude: 1.37
@@ -483,13 +483,13 @@ MonoBehaviour:
         stepSize: 0
         sealevel: 0
         noiseLayers: []
-  - enabled: 1
+  - enabled: 0
     affectsOcean: 0
     maskMode: 0
     noiseSettings:
       filterType: 2
       settings:
-        rid: 9134762999485562892
+        rid: 9134763016859680980
       layeredNoiseSettings:
         center: {x: 0, y: 0, z: 0}
         amplitude: 0.79
@@ -657,7 +657,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762999485562893
+        rid: 9134763016859680981
       layeredNoiseSettings:
         center: {x: 2.4, y: 0, z: 0}
         amplitude: 2.02
@@ -738,7 +738,7 @@ MonoBehaviour:
     noiseSettings:
       filterType: 1
       settings:
-        rid: 9134762999485562894
+        rid: 9134763016859680982
       layeredNoiseSettings:
         center: {x: 0, y: 0, z: 0}
         amplitude: 0.2
@@ -906,7 +906,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762999485562895
+        rid: 9134763016859680983
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 2.48}
         amplitude: 0.4
@@ -1012,13 +1012,13 @@ MonoBehaviour:
         sealevel: 0
         noiseLayers: []
   baseLayer:
-    enabled: 1
+    enabled: 0
     affectsOcean: 1
     maskMode: 0
     noiseSettings:
       filterType: 0
       settings:
-        rid: 9134762999485562888
+        rid: 9134763016859680976
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 2.48}
         amplitude: 0.06
@@ -1216,7 +1216,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762999485562889
+        rid: 9134763016859680977
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 0}
         amplitude: 0.02
@@ -1292,13 +1292,13 @@ MonoBehaviour:
         sealevel: 0
         noiseLayers: []
   layer01:
-    enabled: 1
+    enabled: 0
     affectsOcean: 0
     maskMode: 0
     noiseSettings:
       filterType: 1
       settings:
-        rid: 9134762999485562890
+        rid: 9134763016859680978
       layeredNoiseSettings:
         center: {x: -22.59, y: 0, z: 0}
         amplitude: 4.64
@@ -1406,7 +1406,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762999485562891
+        rid: 9134763016859680979
       layeredNoiseSettings:
         center: {x: 2.4, y: 0, z: 0}
         amplitude: 1.37
@@ -1482,13 +1482,13 @@ MonoBehaviour:
         sealevel: 0
         noiseLayers: []
   layer02:
-    enabled: 1
+    enabled: 0
     affectsOcean: 0
     maskMode: 0
     noiseSettings:
       filterType: 2
       settings:
-        rid: 9134762999485562892
+        rid: 9134763016859680980
       layeredNoiseSettings:
         center: {x: 0, y: 0, z: 0}
         amplitude: 0.79
@@ -1656,7 +1656,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762999485562893
+        rid: 9134763016859680981
       layeredNoiseSettings:
         center: {x: 2.4, y: 0, z: 0}
         amplitude: 2.02
@@ -1738,7 +1738,7 @@ MonoBehaviour:
     noiseSettings:
       filterType: 1
       settings:
-        rid: 9134762999485562894
+        rid: 9134763016859680982
       layeredNoiseSettings:
         center: {x: 0, y: 0, z: 0}
         amplitude: 0.2
@@ -1906,7 +1906,7 @@ MonoBehaviour:
     maskSettings:
       filterType: 0
       settings:
-        rid: 9134762999485562895
+        rid: 9134763016859680983
       layeredNoiseSettings:
         center: {x: -0.94, y: 0, z: 2.48}
         amplitude: 0.4
@@ -2014,7 +2014,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 9134762999485562888
+    - rid: 9134763016859680976
       type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: -0.94, y: 0, z: 2.48}
@@ -2055,7 +2055,7 @@ MonoBehaviour:
         - amplitude: 0.00008744993
           frequency: 5310.035
           dimension: 9500
-    - rid: 9134762999485562889
+    - rid: 9134763016859680977
       type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: -0.94, y: 0, z: 0}
@@ -2096,7 +2096,7 @@ MonoBehaviour:
         - amplitude: 0.0000390625
           frequency: 1029.12
           dimension: 9500
-    - rid: 9134762999485562890
+    - rid: 9134763016859680978
       type: {class: NoiseSettings/RigidNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: 0, y: 0, z: 0}
@@ -2137,7 +2137,7 @@ MonoBehaviour:
         - amplitude: 0.00272383
           frequency: 5174.611
           dimension: 9500
-    - rid: 9134762999485562891
+    - rid: 9134763016859680979
       type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: 2.4, y: 0, z: 0}
@@ -2178,7 +2178,7 @@ MonoBehaviour:
         - amplitude: 0.00043876347
           frequency: 5341.328
           dimension: 9500
-    - rid: 9134762999485562892
+    - rid: 9134763016859680980
       type: {class: NoiseSettings/DistortedNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: 0, y: 0, z: 0}
@@ -2255,7 +2255,7 @@ MonoBehaviour:
         - amplitude: 38.54519
           frequency: 32.05207
           dimension: 59500
-    - rid: 9134762999485562893
+    - rid: 9134763016859680981
       type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: 2.4, y: 0, z: 0}
@@ -2296,7 +2296,7 @@ MonoBehaviour:
         - amplitude: 0.0039453125
           frequency: 1884.16
           dimension: 9500
-    - rid: 9134762999485562894
+    - rid: 9134763016859680982
       type: {class: NoiseSettings/RigidNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: -0.94, y: 0, z: 10.93}
@@ -2337,7 +2337,7 @@ MonoBehaviour:
         - amplitude: 0.00094502897
           frequency: 49161.03
           dimension: 9500
-    - rid: 9134762999485562895
+    - rid: 9134763016859680983
       type: {class: NoiseSettings/LayeredNoiseSettings, ns: PlanetGeneration.TerrainGeneration, asm: Assembly-CSharp}
       data:
         center: {x: -0.94, y: 0, z: 2.48}

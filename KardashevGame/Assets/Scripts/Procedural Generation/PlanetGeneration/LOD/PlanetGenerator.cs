@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using PlanetGeneration;
 using PlanetGeneration.Chunks;
 using PlanetGeneration.TerrainGeneration;
@@ -28,6 +29,13 @@ public class PlanetGenerator : MonoBehaviour {
     [SerializeField]
     private bool testPlanet;
     private bool testPlanetInited;
+
+    [Flags]
+    private enum GizmoMode {
+        Nothing, Vertices = 1, Triangles = 2, Normals = 4, Tangents = 8
+    }
+    [SerializeField]
+    private GizmoMode gizmoMode;
 
     [SerializeField]
     private TestMode testMode;
@@ -194,5 +202,54 @@ public class PlanetGenerator : MonoBehaviour {
 
     public void OnValidate() {
         if (!testPlanet) testPlanetInited = false;
+    }
+
+    public void OnDrawGizmos() {
+        if (!testPlanet || gizmoMode == GizmoMode.Nothing) return;
+
+        HashSet<Chunk> chunks = chunkHandler.GetLoadedChunks();
+
+        bool bvertices = (gizmoMode & GizmoMode.Vertices) != 0;
+        bool bnormals = (gizmoMode & GizmoMode.Normals) != 0;
+        bool btriangles = (gizmoMode & GizmoMode.Triangles) != 0;
+
+        foreach (Chunk chunk in chunks) {
+            Mesh mesh = chunk.mesh;
+
+            Vector3[] verts = mesh.vertices;
+
+            if (bvertices) {
+                Gizmos.color = Color.red;
+
+                int index = 0;
+                foreach (Vector3 vert in verts) {
+                    Gizmos.DrawSphere(vert, 0.02f);
+
+                    index++;
+                }
+            }
+
+            if (btriangles) {
+                Gizmos.color = Color.red;
+
+                int[] triangles = mesh.triangles;
+                for (int i = 0; i < triangles.Length; i += 3) {
+                    if (verts[triangles[i]].y > 0) {
+                        Gizmos.DrawLine(verts[triangles[i]], verts[triangles[i + 1]]);
+                        Gizmos.DrawLine(verts[triangles[i]], verts[triangles[i + 2]]);
+                        Gizmos.DrawLine(verts[triangles[i + 1]], verts[triangles[i + 2]]);
+                    }
+                }
+            }
+
+            if (bnormals) {
+                Gizmos.color = Color.green;
+
+                Vector3[] normals = mesh.normals;
+                for (int i = 0; i < normals.Length; i++) {
+                    Gizmos.DrawRay(verts[i], normals[i] * 2);
+                }
+            }
+        }
     }
 }
