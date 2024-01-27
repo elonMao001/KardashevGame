@@ -13,7 +13,7 @@ public class ObserverScript : MonoBehaviour {
 
     private PlanetGenerator planetGenerator;
 
-    private float alat, along, w; 
+    private float alat = 0.3633685f, along, w; 
     private int latVel, longVel, zoomVel;
 
     [SerializeField]
@@ -39,6 +39,7 @@ public class ObserverScript : MonoBehaviour {
     private void Start() {
         planetGenerator = centerOfRotation.GetComponent<PlanetGenerator>();
     }
+
 
     private void Update() {
         CheckKeyBinds();
