@@ -47,13 +47,11 @@ public class Factory : MonoBehaviour
         {
             for(int i = 0; i < inputGoodsFill.Length; i++)
             {
-                SubtractGoods(inputGoods[i], inputGoodsFill[i], recipe.inputNumbers[i]);
-                inputGoodsFill[i] -= recipe.inputNumbers[i];
+                SubtractGoods(inputGoods[i], inputGoodsFill, i, recipe.inputNumbers[i]);
             }
             for(int i = 0; i < outputGoodsFill.Length; i++)
             {
-                AddGoods(outputGoods[i], outputGoodsFill[i], recipe.outputNumbers[i], recipe.outputIDs[i]);
-                outputGoodsFill[i] += recipe.outputNumbers[i];
+                AddGoods(outputGoods[i], outputGoodsFill, i, recipe.outputNumbers[i], recipe.outputIDs[i]);
             }
             progress = 0;
         }
@@ -105,33 +103,37 @@ public class Factory : MonoBehaviour
         return recipe;
     }
 
-    public static void AddGoods(Good[] goods, int fill, int amount, int good)
+    public void AddGoods(Good[] goods, int[] fill, int index,  int amount, int good)
     {
-        for (int i = fill; i < fill + amount; i++) {
+        for (int i = fill[index]; i < fill[index] + amount; i++) {
             goods[i] = new Good(good);
         }
+        fill[index] += amount;
     }
 
-    public static Good SubtractGoods(Good[] goods, int fill, int amount)
+    public Good[] SubtractGoods(Good[] goods, int[] fill, int index, int amount)
     {
-        for(int i = fill - amount; i < fill; i++)
+        Good[] ret = new Good[amount];
+        for(int i = fill[index] - amount; i < fill[index]; i++)
         {
             Good g = goods[i];
             goods[i] = null;
-            return g;
+            ret[i - (fill[index] - amount)] = g;
         }
-        return null;
+        fill[index] -= amount;
+        return ret;
     }
 
     public Vector3 GetClosestAccess(Vector3 point, out bool isOut) {
         double curDist = double.MaxValue;
         Vector3 curAccess = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
         isOut = true;
-        foreach(Vector3 v in inputPos)
+        float corFactor = transform.localScale.x;
+        foreach (Vector3 v in inputPos)
         {
             if(curDist > Vector3.Distance(v, point))
             {
-                curAccess = v;
+                curAccess = v * corFactor;
                 curDist = Vector3.Distance(v, point);
                 isOut = false;
             }
@@ -141,7 +143,7 @@ public class Factory : MonoBehaviour
         {
             if (curDist > Vector3.Distance(v, point))
             {
-                curAccess = v;
+                curAccess = v * corFactor;
                 curDist = Vector3.Distance(v, point);
                 isOut = true;
             }
@@ -153,11 +155,12 @@ public class Factory : MonoBehaviour
     public Vector3 GetClosesInput(Vector3 point) {
         double curDist = 999999999;
         Vector3 curInput = new Vector3(999999999, 999999999, 999999999);
+        float corFactor = transform.localScale.x;
         foreach (Vector3 v in inputPos)
         {
             if (curDist > Vector3.Distance(v, point))
             {
-                curInput = v;
+                curInput = v * corFactor;
                 curDist = Vector3.Distance(v, point);
             }
         }
@@ -168,11 +171,12 @@ public class Factory : MonoBehaviour
     public Vector3 GetClosestOutput(Vector3 point) {
         double curDist = 999999999;
         Vector3 curOutput = new Vector3(999999999, 999999999, 999999999);
+        float corFactor = transform.localScale.x;
         foreach (Vector3 v in outputPos)
         {
             if (curDist > Vector3.Distance(v, point))
             {
-                curOutput = v;
+                curOutput = v * corFactor;
                 curDist = Vector3.Distance(v, point);
             }
         }

@@ -38,7 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
+<<<<<<< Updated upstream
   m_IndirectSpecularColor: {r: 0.00080953666, g: 0.004162025, b: 0.02006424, a: 1}
+=======
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+>>>>>>> Stashed changes
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5392,7 +5396,10 @@ MonoBehaviour:
   observer: {fileID: 704054329}
   shapeSettings: {fileID: 11400000, guid: 98cc633743e8f2f4e8c7d725e02aeb0c, type: 2}
   colorSettings: {fileID: 11400000, guid: 64561920e7c09eb41b2bd38cdd5ffff9, type: 2}
+<<<<<<< Updated upstream
   rotationSpeed: 0
+=======
+>>>>>>> Stashed changes
   testPlanet: 0
   testMode: 2
   updateDelay: 0
