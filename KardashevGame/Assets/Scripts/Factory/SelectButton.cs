@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Die Klasse SelectButton existiert nur, weil sich die geklonten Button nicht direkt an die UImanager-Klasse des GameObject Player verbinden lieﬂen
 public class SelectButton : MonoBehaviour
 {
     private GameObject player;

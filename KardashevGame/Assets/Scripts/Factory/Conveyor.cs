@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Der ConveyorCheater umgeht das Problem, dass Conveyor gleichzeitig ein Monobehaviour als auch eine Klasse mit Konstruktoren sein muss
 public class ConveyorCheater : MonoBehaviour
 {
     public Conveyor conveyor = null;
@@ -24,6 +25,7 @@ public class Conveyor
     Vector3[] segments; //obsolet
     Good[] contents;
 
+    //Erster Fall: Das Conveyor geht von einem Punkt auf dem Boden zu einem anderen Punkt auf dem Boden (momentan sinnlos)
     public Conveyor(float s, Vector3 start, Vector3 end) {
         speed = s;
         length = Vector3.Distance(start, end);
@@ -39,6 +41,7 @@ public class Conveyor
         }
     }
 
+    //Zweiter Fall: Das Conveyor geht von einem Punkt auf dem Boden zu einer Fabrik (momentan sinnlos)
     public Conveyor(float s, Vector3 start, Vector3 end, Factory fac, bool input)
     {
         speed = s;
@@ -64,6 +67,7 @@ public class Conveyor
         }
     }
 
+    //Dritte Fall: Das Conveyor geht von einer Fabrik zu einer anderen Fabrik
     public Conveyor(float s, Vector3 start, Vector3 end, Factory input, Factory output)
     {
         speed = s;
@@ -99,6 +103,7 @@ public class Conveyor
         }
     }
 
+    //Bewegt alle Güter, die in beiden Fabrikrezepten zu finden sind vom Output der einen zum Input der anderen
     void PullPush()
     {
         Recipe inputRec = input.GetRecipe();
@@ -112,14 +117,15 @@ public class Conveyor
                     if (output.outputGoodsFill[i] > 0 && input.inputGoodsFill[j] < input.FACTORYCAPACITY)
                     {
                         int temp = Mathf.Min(output.outputGoodsFill[i], input.FACTORYCAPACITY - input.inputGoodsFill[j]);
-                        input.AddGoods(input.inputGoods[j], input.inputGoodsFill, j, temp, good);
-                        output.SubtractGoods(output.outputGoods[i], output.outputGoodsFill, temp, 1);
+                        input.AddGoods(input.inputGoods[j], input.inputGoodsFill, j, temp, good); //Hier könnte man Conveyorspeed einbauen
+                        output.SubtractGoods(output.outputGoods[i], output.outputGoodsFill, temp, 1); // *
                     }
                 }
             }
         }
     }
 
+    //Überprüft die Grundvoraussetzung um Güter zu übertragen
     bool CanPullPush()
     {
         if (input != null && output != null && input.GetRecipe() != null && output.GetRecipe() != null)

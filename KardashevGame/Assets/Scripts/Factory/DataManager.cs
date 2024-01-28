@@ -17,6 +17,7 @@ public static class DataManager
     public static readonly int NULLINDEX = -1;
     public static readonly Vector3 NULLVECTOR = Vector3.negativeInfinity;
 
+    //Versucht aus einem Rezeptnamen den Index zu finden
     public static int GetRecipeIndex(string name) {
         foreach(string s in recipes)
         {
@@ -29,6 +30,7 @@ public static class DataManager
         return NULLINDEX;
     }
 
+    //Versucht aus einem Gutnamen den Index zu finden
     public static int GetGoodIndex(string name) {
         foreach (string s in goods)
         {
@@ -41,6 +43,7 @@ public static class DataManager
         return NULLINDEX;
     }
 
+    //Versucht aus einem Gebäudenamen den Index zu finden
     public static int GetBuildingIndex(string name)
     {
         foreach (string s in buildings)
@@ -54,6 +57,7 @@ public static class DataManager
         return NULLINDEX;
     }
 
+    //Holt aus dem Index eines Rezptes den zugehörigen Namen
     public static string GetRecipeName(int recipe) {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
             return null;
@@ -61,13 +65,15 @@ public static class DataManager
         return s[1];
     }
 
+    //Holt aus dem Index eines Guts den zugehörigen Namen
     public static string GetGoodName(int good) {
         if (good > goods.Length - 1)
             return "";
         string[] s = goods[good].Split(COLOUMNSEPARATOR);
         return s[1];
     }
-
+    
+    //Holt aus dem Index eines Guts das zugehörigen Bild
     public static string GetGoodImage(int good)
     {
         if (good > goods.Length - 1)
@@ -76,6 +82,7 @@ public static class DataManager
         return s[2];
     }
 
+    //Holt aus dem Index eines Rezeptes die Anzahl an Inputs
     public static int GetInputAmount(int recipe)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -84,6 +91,7 @@ public static class DataManager
         return int.Parse(s[2]);
     }
 
+    //Holt aus dem Index eines Rezeptes die Anzahl an Outputs
     public static int GetOutputAmount(int recipe) {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
             return NULLINDEX;
@@ -92,6 +100,7 @@ public static class DataManager
         return int.Parse(s[location]);
     }
 
+    //Holt aus dem Index eines Rezeptes und der Zahel n den Index des n-ten Inputs
     public static int GetNInput(int recipe, int n)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -103,6 +112,7 @@ public static class DataManager
         return int.Parse(s[location]);
     }
 
+    //Holt aus dem Index eines Rezeptes und der Zahel n den Index des n-ten Outputs
     public static int GetNOutput(int recipe, int n)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -113,6 +123,7 @@ public static class DataManager
         return int.Parse(s[location]);
     }
 
+    //Holt aus dem Index eines Rezeptes und der Zahel n die Anzahl des n-ten Inputs
     public static int GetNInputNumber(int recipe, int n) {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
             return NULLINDEX;
@@ -123,6 +134,7 @@ public static class DataManager
         return int.Parse(s[location + 1]);
     }
 
+    //Holt aus dem Index eines Rezeptes und der Zahel n die Anzahl des n-ten Outputs
     public static int GetNOutputNumber(int recipe, int n) {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
             return NULLINDEX;
@@ -132,6 +144,7 @@ public static class DataManager
         return int.Parse(s[location + 1]);
     }
 
+    //Holt aus dem Index eines Rezeptes die Indexe aller Inputs
     public static int[] GetAllInput(int recipe)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -146,6 +159,7 @@ public static class DataManager
         return ret;
     }
 
+    //Holt aus dem Index eines Rezeptes die Indexe aller Outputs
     public static int[] GetAllOutput(int recipe)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -160,6 +174,7 @@ public static class DataManager
         return ret;
     }
 
+    //Holt aus dem Index eines Rezeptes die Anzahlen aller Inputs
     public static int[] GetAllInputNumber(int recipe)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -174,6 +189,7 @@ public static class DataManager
         return ret;
     }
 
+    //Holt aus dem Index eines Rezeptes die Anzahlen aller Outputs
     public static int[] GetAllOutputNumber(int recipe)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -190,6 +206,7 @@ public static class DataManager
         return ret;
     }
 
+    //Holt aus dem Index eines Rezepts den Index der benötigten Fabrik
     public static int GetRecipeBuilding(int recipe)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -198,6 +215,7 @@ public static class DataManager
         return int.Parse(s[s.Length - 2]);
     }
 
+    //Holt aus dem Index eines Rezeptes die Rezeptzeit
     public static float GetRecipeDuration(int recipe) {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
             return NULLINDEX;
@@ -205,6 +223,7 @@ public static class DataManager
         return float.Parse(s[s.Length-1]);
     }
 
+    //Holt aus dem Index eines Gebäudes den zugehörigen Namen
     public static string GetBuildingName(int building)
     {
         if (building == NULLINDEX || building < 0 || building >= buildings.Length)
@@ -213,6 +232,7 @@ public static class DataManager
         return s[1];
     }
 
+    //Holt aus dem Index eines Gebäudes die Anzahl Inputs
     public static int GetBuildingInputAmount(int building)
     {
         if (building == NULLINDEX || building < 0 || building >= buildings.Length)
@@ -221,6 +241,7 @@ public static class DataManager
         return int.Parse(s[2]);
     }
 
+    //Holt aus dem Index eines Gebäudes die Anzahl Outputs
     public static int GetBuildingOutputAmount(int building)
     {
         if (building == NULLINDEX || building < 0 || building >= buildings.Length)
@@ -229,6 +250,7 @@ public static class DataManager
         return int.Parse(s[3 + int.Parse(s[2]) * 2]);
     }
 
+    //Holt aus dem Index eines Gebäudes und der Zahl n die Koordinaten des n-ten Inputs
     public static Vector3 GetNBuildingInput(int building, int n)
     {
         if (building == NULLINDEX || building < 0 || building >= buildings.Length)
@@ -239,6 +261,7 @@ public static class DataManager
         return new Vector3(float.Parse(s[n * 3 + 3]), float.Parse(s[n * 3 + 4]), float.Parse(s[n * 3 + 5]));
     }
 
+    //Holt aus dem Index eines Gebäudes und der Zahl n die Koordinaten des n-ten Outputs
     public static Vector3 GetNBuildingOutput(int building, int n)
     {
         if (building == NULLINDEX || building < 0 || building >= buildings.Length)
@@ -248,6 +271,7 @@ public static class DataManager
         return new Vector3(float.Parse(s[offset + n * 3]), float.Parse(s[offset + n * 3 + 1]), float.Parse(s[offset + n * 3]));
     }
 
+    //Holt aus dem Index eines Gebäudes die Koordinaten aller Inputs
     public static Vector3[] GetAllBuildingInput(int building)
     {
         if (building == NULLINDEX || building < 0 || building >= buildings.Length)
@@ -262,6 +286,7 @@ public static class DataManager
         return ret;
     }
 
+    //Holt aus dem Index eines Gebäudes die Koordinaten aller Outputs
     public static Vector3[] GetAllBuildingOutput(int building)
     {
         if (building == NULLINDEX || building < 0 || building >= buildings.Length)
@@ -277,6 +302,7 @@ public static class DataManager
         return ret;
     }
 
+    //Holt aus dem Index eines Rezeptes und der Zahl n den Namen des n-ten Inputs
     public static string GetNInputName(int recipe, int n)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -284,12 +310,14 @@ public static class DataManager
         return GetGoodName(GetNInput(recipe, n));
     }
 
+    //Holt aus dem Index eines Rezeptes und der Zahl n den Namen des n-ten Outputs
     public static string GetNOutputName(int recipe, int n) {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
             return null;
         return GetGoodName(GetNOutput(recipe, n));
     }
 
+    //Holt aus dem Index eines Rezeptes die Namen aller Inputs
     public static string[] GetAllInputName(int recipe)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -303,6 +331,7 @@ public static class DataManager
         return ret;
     }
 
+    //Holt aus dem Index eines Rezeptes die Namen aller Outputs
     public static string[] GetAllOutputName(int recipe) {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
             return null;
@@ -315,6 +344,7 @@ public static class DataManager
         return ret;
     }
 
+    //Holt aus dem Index eines Rezeptes und der Zahl n den Namen des n-ten Inputbildes
     public static string GetNInputImage(int recipe, int n)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -322,6 +352,7 @@ public static class DataManager
         return GetGoodImage(GetNInput(recipe, n));
     }
 
+    //Holt aus dem Index eines Rezeptes und der Zahl n den Namen des n-tenOutputbildes
     public static string GetNOutputImage(int recipe, int n)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -329,6 +360,7 @@ public static class DataManager
         return GetGoodImage(GetNOutput(recipe, n));
     }
 
+    //Holt aus dem Index eines Rezeptes die Namen alle Inputbilder
     public static string[] GetAllInputImage(int recipe)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -342,6 +374,7 @@ public static class DataManager
         return ret;
     }
 
+    //Holt aus dem Index eines Rezeptes die Namen aller Outputbilder
     public static string[] GetAllOutputImage(int recipe)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -355,6 +388,7 @@ public static class DataManager
         return ret;
     }
 
+    //Holt aus dem Index eines Rezeptes die zugehörige Fabrik (Mir fällt jetzt erst auf, dass es diese Methode schon gab)
     public static int GetFactory(int recipe)
     {
         if (recipe == NULLINDEX || recipe < 0 || recipe >= recipes.Length)
@@ -364,6 +398,7 @@ public static class DataManager
         return int.Parse(s[location]);
     }
 
+    //Holt aus dem Index einer Fabrik alle zugehörigen Rezepte
     public static int[] GetRecipesForFactory(int factory)
     {
         int[] ret = new int[recipes.Length-1];

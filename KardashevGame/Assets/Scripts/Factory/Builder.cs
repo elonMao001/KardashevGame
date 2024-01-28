@@ -32,6 +32,7 @@ public class Builder : MonoBehaviour
         }
     }
     
+    //Überprüft, was für einen Collider ein RayCast zur Maus berührt, und startet dann je nach selected den Bau eines bestimmten Gebäudes
     void CheckRay()
     {
         RaycastHit hit;
@@ -48,8 +49,11 @@ public class Builder : MonoBehaviour
                     StartCoroutine(ConstructConveyor(hit));
             }
         }
+        if (selected == 'f' && hit.collider.gameObject.CompareTag("Factory"))
+            Destroy(hit.collider.gameObject);
     }
 
+    //Erstellt ein Fabrik-GameObject in der richtigen Position und Größe, sowie mit den richtigen Komponenten
     void ConstructFactory(RaycastHit hit)
     {
         GameObject g = Instantiate(defaultBuildings[selected - '0']);
@@ -60,12 +64,13 @@ public class Builder : MonoBehaviour
         g.tag = "Factory";
 
         g.transform.position = hit.point + new Vector3(0, 0, 0);
-        g.transform.localScale = new Vector3(1, 1, 1) / 2;
+        g.transform.localScale = new Vector3(1, 1, 1) / 3;
         g.transform.Rotate(new Vector3(90, transform.rotation.eulerAngles.y, 0));
 
         g.GetComponent<Factory>().Init(selected - '0');
     }
 
+    //Erstellt ein Conveyor-GameObject in der richtigen Position und Größe und hängt ein ConveyorCheater-Skript dran
     void DrawConveyor(Conveyor c)
     {
         GameObject g = Instantiate(defaultBuildings[0]);
@@ -85,6 +90,7 @@ public class Builder : MonoBehaviour
         g.name = "Conveyor";
     }
 
+    //Coroutine, welche überprüft, welcher Conveyor-Fall vorliegt und DrawConveyor() mit dem richtigen Conveyor-Skript startet
     private IEnumerator ConstructConveyor(RaycastHit hit1)
     {
         while (true)
@@ -156,11 +162,13 @@ public class Builder : MonoBehaviour
         }
     }
 
+    //Unity-Methode, die bei jeder Form von Event aufgerufen wird
     private void OnGUI()
     {
         CheckSelection();
     }
 
+    //Umständlicher "temporärer" Code, um aus einem Tastatur-Event den char für selected zu wählen
     void CheckSelection()  // highly inefficient upon expansion
     {
         Event e = Event.current;

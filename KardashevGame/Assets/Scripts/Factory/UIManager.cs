@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //Führt einen RayCast aus um zu schauen ob und welche Fabrik ausgeählt wurde
     void CheckRay() {
         RaycastHit hit;
         if(uIopen || !Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100) || Builder.selected != 'i')
@@ -56,6 +57,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //Öffnet eine der beiden UI-Varianten
     void OpenUI(GameObject factory)
     {
         uIopen = true;
@@ -87,7 +89,9 @@ public class UIManager : MonoBehaviour
         openendUI = UI;
     }
 
-private void CreateItemSlots(GameObject UI, string original, string[] images, string[] names, int[] numbers, int x)
+    //Hilfsmethode um nicht für Input- und Output-Slots zweimal fast das gleiche zu schreiben
+    //Kopiert das Original-Panel und initialisiert die Kopien
+    private void CreateItemSlots(GameObject UI, string original, string[] images, string[] names, int[] numbers, int x)
     {
         GameObject origPanel = null;
         for (int i = 0; i < UI.transform.GetChild(0).childCount; i++)
@@ -120,6 +124,7 @@ private void CreateItemSlots(GameObject UI, string original, string[] images, st
         }
     }
 
+    //Zweite UI-Variante. Wie bei CreateItemSlots() wird hier eine originelle Panel kopiert und die Kopien initialisiert
     void OpenRecipeSelect(GameObject factory) {
         CloseUI();
         int[] possibleRecipes = DataManager.GetRecipesForFactory(factory.GetComponent<Factory>().me);
