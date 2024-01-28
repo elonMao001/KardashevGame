@@ -2,7 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Conveyor : MonoBehaviour
+public class ConveyorCheater : MonoBehaviour
+{
+    public Conveyor conveyor = null;
+
+    private void Update()
+    {
+        if (conveyor != null)
+            conveyor.Update();
+    }
+}
+
+public class Conveyor
 {
     public float length;
     Factory input = null;
@@ -80,7 +91,7 @@ public class Conveyor : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if(CanPullPush())
         {
@@ -92,16 +103,17 @@ public class Conveyor : MonoBehaviour
     {
         Recipe inputRec = input.GetRecipe();
         Recipe outputRec = output.GetRecipe();
-        for (int i = 0; i < inputRec.outputIDs.Length; i++) {
-            int good = inputRec.outputIDs[i];
-            for (int j = 0; j < outputRec.inputIDs.Length; j++)
+        for (int i = 0; i < outputRec.outputIDs.Length; i++) {
+            int good = outputRec.outputIDs[i];
+            for (int j = 0; j < inputRec.inputIDs.Length; j++)
             {
-                if (good == outputRec.inputIDs[j])
+                if (good == inputRec.inputIDs[j])
                 {
-                    while (input.outputGoodsFill[i] > 0 && output.inputGoodsFill[j] < output.FACTORYCAPACITY)
+                    if (output.outputGoodsFill[i] > 0 && input.inputGoodsFill[j] < input.FACTORYCAPACITY)
                     {
-                        Factory.AddGoods(output.inputGoods[j], output.inputGoodsFill[j], 1, good); //Verbesserbar (Warum immer nur eins)
-                        Factory.SubtractGoods(input.outputGoods[i], input.outputGoodsFill[i], 1);
+                        int temp = Mathf.Min(output.outputGoodsFill[i], input.FACTORYCAPACITY - input.inputGoodsFill[j]);
+                        input.AddGoods(input.inputGoods[j], input.inputGoodsFill, j, temp, good);
+                        output.SubtractGoods(output.outputGoods[i], output.outputGoodsFill, temp, 1);
                     }
                 }
             }

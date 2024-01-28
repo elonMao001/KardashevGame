@@ -13,6 +13,8 @@ public class Builder : MonoBehaviour
     public GameObject[] defaultBuildings = new GameObject[4];
     public GameObject inventory;
 
+    bool waiting = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +44,8 @@ public class Builder : MonoBehaviour
                 ConstructFactory(hit);
             } else
             {
-                StartCoroutine(ConstructConveyor(hit));
+                if(!waiting)
+                    StartCoroutine(ConstructConveyor(hit));
             }
         }
     }
@@ -57,7 +60,7 @@ public class Builder : MonoBehaviour
         g.tag = "Factory";
 
         g.transform.position = hit.point + new Vector3(0, 0, 0);
-        g.transform.localScale = new Vector3(1, 1, 1);
+        g.transform.localScale = new Vector3(1, 1, 1) / 2;
         g.transform.Rotate(new Vector3(90, transform.rotation.eulerAngles.y, 0));
 
         g.GetComponent<Factory>().Init(selected - '0');
@@ -77,7 +80,7 @@ public class Builder : MonoBehaviour
         // Apply the rotation to the GameObject
         g.transform.rotation = rotation;
 
-
+        g.AddComponent<ConveyorCheater>().conveyor = c;
 
         g.name = "Conveyor";
     }
@@ -87,7 +90,9 @@ public class Builder : MonoBehaviour
         while (true)
         {
             yield return null;
+            waiting = true;
             yield return new WaitForNextMouseClick();
+            waiting = false;
             RaycastHit hit2;
             if (!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit2, 100))
             {

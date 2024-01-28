@@ -1,4 +1,4 @@
-Indexe:
+Goods:
 Index  Name  Bild   
 
 Rezepte:
@@ -14,5 +14,5 @@ Zwischen Inhalten immer zwei Leerzeichen!
 Dezimalzahlen werden mit ',' getrennt statt mit '.'!
 -1 = Null-Index!
 Zeiten in Sekunden!
-Bilder anscheinend sohne Endungen!
+Bilder anscheinend ohne Endungen!
 Beim Auslesen ist der letzte Eintrag zu ignorieren ("   ")!
