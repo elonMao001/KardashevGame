@@ -34,7 +34,7 @@ namespace PlanetGeneration.Chunks {
 
             float chunkSize = planetRadius;
             depth = 0;
-            while (chunkSize > largestChunkSize) {
+            while (chunkSize > largestChunkSize && depth <= PlanetGenerator.maxDepth) {
                 chunkSize *= 0.5f;
                 depth++;
             }

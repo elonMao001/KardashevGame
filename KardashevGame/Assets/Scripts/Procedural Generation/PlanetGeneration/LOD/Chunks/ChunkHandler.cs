@@ -2,13 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using PlanetGeneration;
-using PlanetGeneration.Chunks;
-using PlanetGeneration.TerrainGeneration;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace PlanetGeneration.Chunks {
     public class ChunkHandler {
@@ -19,14 +14,12 @@ namespace PlanetGeneration.Chunks {
         private CubeSphere cubeSphere;
         private ChunkRangeTest chunkRangeTest;
 
-        private int maxDepth = 0;
         private Transform[] levels;
 
         private int meshWorkload;
 
         public ChunkHandler(CubeSphere cubeSphere, int maxDepth, Transform[] levels, ChunkRangeTest chunkRangeTest) {
             this.cubeSphere = cubeSphere;
-            this.maxDepth = maxDepth;
             this.levels = levels;
             this.chunkRangeTest = chunkRangeTest;
 
@@ -123,25 +116,71 @@ namespace PlanetGeneration.Chunks {
             }
         }
 
-        public void PlanetTestMode(int faces) {
+        public void PlanetTestMode(int faces, int depth) {
             foreach (Chunk chunk in loadedChunks) {
                 chunk.myObject.gameObject.SetActive(false);
                 deactivatedChunks.Add(chunk);
             }
 
+            List<Chunk> newChunks = new List<Chunk>(), tempChunks = new List<Chunk>();
+
             loadedChunks.Clear();
             generatedChunks.Clear();
             for (int i = 0; i < 6; i++) {
                 if ((faces & Func.ThePowersThatB2[i]) != 0) {
-                    loadedChunks.Add(cubeSphere.faces[i]);
-                    generatedChunks.Add(cubeSphere.faces[i]);
+                    newChunks.Add(cubeSphere.faces[i]);
+                }
+            }
 
-                    if (cubeSphere.faces[i].myObject == null) {
-                        createChunks.Add(cubeSphere.faces[i]);
-                    } else {
-                        cubeSphere.faces[i].myObject.gameObject.SetActive(true);
-                        deactivatedChunks.Remove(cubeSphere.faces[i]);
+            if (depth > 0) {
+                for (int i = 0; i < 6; i++) {
+                    if (newChunks[i].myObject != null) {
+                        deactivatedChunks.Add(newChunks[i]);
+                        newChunks[i].myObject.gameObject.SetActive(false);
                     }
+
+                    if (newChunks[i].mesh == null)
+                        cubeSphere.GenerateFace(newChunks[i].Index);
+
+                    if (newChunks[i].subChunks == null)
+                        newChunks[i].SubDivide();
+
+                    tempChunks.AddRange(newChunks[i].subChunks);
+                }
+                newChunks = tempChunks;
+                tempChunks = new List<Chunk>();
+
+                for (int i = 1; i < depth; i++) {
+                    while (newChunks.Any()) {
+                        Chunk chunk = newChunks[0];
+                        newChunks.RemoveAt(0);
+
+                        if (chunk.mesh == null)
+                            cubeSphere.GenerateSubChunk(chunk);
+
+                        if (chunk.subChunks == null)
+                            chunk.SubDivide();
+
+                        tempChunks.AddRange(chunk.subChunks);
+                    }
+
+                    newChunks = tempChunks;
+                    tempChunks = new List<Chunk>();
+                }
+            }
+
+            foreach (Chunk chunk in newChunks) {
+                loadedChunks.Add(chunk);
+                generatedChunks.Add(chunk);
+
+                if (depth > 0)
+                    cubeSphere.GenerateSubChunk(chunk);
+
+                if (chunk.myObject == null) {
+                    createChunks.Add(chunk);
+                } else {
+                    chunk.myObject.gameObject.SetActive(true);
+                    deactivatedChunks.Remove(chunk);
                 }
             }
         }

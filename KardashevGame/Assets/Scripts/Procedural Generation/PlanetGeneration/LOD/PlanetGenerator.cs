@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using PlanetGeneration;
 using PlanetGeneration.Chunks;
 using PlanetGeneration.TerrainGeneration;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlanetGenerator : MonoBehaviour {
@@ -15,6 +16,8 @@ public class PlanetGenerator : MonoBehaviour {
     private Transform chunkPrefab;
     [SerializeField]
     private Transform ocean;
+    [SerializeField]
+    private Transform colliders;
 
     public Transform observer;
 
@@ -26,8 +29,6 @@ public class PlanetGenerator : MonoBehaviour {
     [SerializeField]
     private float rotationSpeed;
 
-    [SerializeField]
-    private bool testPlanet;
     private bool testPlanetInited;
 
     [Flags]
@@ -39,11 +40,21 @@ public class PlanetGenerator : MonoBehaviour {
 
     [SerializeField]
     private TestMode testMode;
-    private TestMode lastTestMode;
-    [Flags]
-    public enum TestMode {
-        Off = 0, Right = 1, Top = 2, Front = 4, Back = 8, Bottom = 16, Left = 32
+    private enum TestMode {
+        Off, Faces, Depth
     }
+
+    [SerializeField]
+    private FaceMode faceMode;
+    [Flags]
+    public enum FaceMode {
+        None = 0, Right = 1, Top = 2, Front = 4, Back = 8, Bottom = 16, Left = 32
+    }
+
+    [SerializeField, Min(1)]
+    private int testDepth;
+    [SerializeField, Min(0)]
+    private float chunkDispersion;
 
     private TerrainGenerator terrainGenerator;
     private ColorGenerator colorGenerator;
@@ -83,6 +94,8 @@ public class PlanetGenerator : MonoBehaviour {
         cubeSphere = new CubeSphere(terrainGenerator);
         chunkHandler = new ChunkHandler(cubeSphere, maxDepth, levels, new ChunkRangeTest(this));
 
+        GenerateColliders();
+
         colorGenerator.UpdateElevationMinMax(terrainGenerator.minmax);
         colorGenerator.UpdateSurfaceGradient();
         colorGenerator.UpdateOceanfloorGradient();
@@ -93,15 +106,38 @@ public class PlanetGenerator : MonoBehaviour {
     }
 
     private void Update() {
-        if (testPlanet) {
-            if (lastTestMode != testMode || !testPlanetInited) {
-                chunkHandler.PlanetTestMode((int)testMode);
+        if (testMode == TestMode.Off) {
+            if (updateCounter >= updateDelay) {
+                chunkHandler.UpdateLoadedChunks();
                 CreateChunks();
 
-                lastTestMode = testMode;
-                testPlanetInited = true;
+                foreach (Chunk chunk in chunkHandler.GetLoadedChunks()) {
+                    chunk.myObject.position = transform.TransformPoint(Vector3.Normalize(chunk.mesh.bounds.center) * chunkDispersion);
+                }
+
+                updateCounter = 0;
             }
-            if (shapeNeedsUpdating && updateCounter > updateDelay) { 
+        } else {
+            if (!testPlanetInited) {
+                if (testMode == TestMode.Faces) {
+                    chunkHandler.PlanetTestMode((int)faceMode, 0);
+                    CreateChunks();
+
+                    testPlanetInited = true;
+                } else 
+                if (testMode == TestMode.Depth) {
+                    chunkHandler.PlanetTestMode((int)faceMode, testDepth);
+                    CreateChunks();
+
+                    testPlanetInited = true;
+                }
+
+                foreach (Chunk chunk in chunkHandler.GetLoadedChunks()) {
+                    chunk.myObject.position = transform.TransformPoint(Vector3.Normalize(chunk.mesh.bounds.center) * chunkDispersion);
+                }
+            }
+
+            if (shapeNeedsUpdating && updateCounter >= updateDelay) { 
                 UpdateShape();
 
                 ocean.transform.localScale = 2f * transform.localScale * shapeSettings.radius;
@@ -109,15 +145,9 @@ public class PlanetGenerator : MonoBehaviour {
                 shapeNeedsUpdating = false;
                 updateCounter = 0;
             }
-        } else if (updateCounter >= updateDelay) {
-            chunkHandler.UpdateLoadedChunks();
-            CreateChunks();
-
-            updateCounter = 0;
         }
 
         transform.localEulerAngles += new Vector3(0, rotationSpeed * Time.deltaTime, 0);
-
         updateCounter += Time.deltaTime;
     }
 
@@ -132,11 +162,6 @@ public class PlanetGenerator : MonoBehaviour {
 
     private void CreateChunkObject(Chunk chunk) {
         chunk.myObject = Instantiate(chunkPrefab, levels[chunk.Depth]);
-
-
-        //tempor�rer (?) Timon-Eingriff
-        //chunk.myObject.GetComponent<MeshCollider>().sharedMesh = chunk.mesh;
-
 
         chunk.ApplyMesh();
     }
@@ -196,16 +221,27 @@ public class PlanetGenerator : MonoBehaviour {
         Debug.Log((Time.realtimeSinceStartup - time) / chunkTestIts);
     }
 
+    public void GenerateColliders() {
+        if (colliders == null) return;
+
+        for (int i = 0; i < cubeSphere.faces.Length; i++) {
+            Transform collider = new GameObject("Collider " + i, typeof(MeshCollider)).transform;
+            collider.GetComponent<MeshCollider>().sharedMesh = cubeSphere.GetFace(i).mesh;
+            collider.SetParent(colliders);
+            collider.tag = "Ground";
+        }
+    }
+
     public float GetRadius() {
         return transform.localScale.x * shapeSettings.radius;
     }
 
     public void OnValidate() {
-        if (!testPlanet) testPlanetInited = false;
+        testPlanetInited = false;
     }
 
     public void OnDrawGizmos() {
-        if (!testPlanet || gizmoMode == GizmoMode.Nothing) return;
+        if (testMode == TestMode.Off || gizmoMode == GizmoMode.Nothing) return;
 
         HashSet<Chunk> chunks = chunkHandler.GetLoadedChunks();
 
@@ -234,11 +270,9 @@ public class PlanetGenerator : MonoBehaviour {
 
                 int[] triangles = mesh.triangles;
                 for (int i = 0; i < triangles.Length; i += 3) {
-                    if (verts[triangles[i]].y > 0) {
-                        Gizmos.DrawLine(verts[triangles[i]], verts[triangles[i + 1]]);
-                        Gizmos.DrawLine(verts[triangles[i]], verts[triangles[i + 2]]);
-                        Gizmos.DrawLine(verts[triangles[i + 1]], verts[triangles[i + 2]]);
-                    }
+                    Gizmos.DrawLine(verts[triangles[i]], verts[triangles[i + 1]]);
+                    Gizmos.DrawLine(verts[triangles[i]], verts[triangles[i + 2]]);
+                    Gizmos.DrawLine(verts[triangles[i + 1]], verts[triangles[i + 2]]);
                 }
             }
 
