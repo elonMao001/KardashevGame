@@ -32,7 +32,7 @@ public class Builder : MonoBehaviour
         }
     }
     
-    //Überprüft, was für einen Collider ein RayCast zur Maus berührt, und startet dann je nach selected den Bau eines bestimmten Gebäudes
+    //ï¿½berprï¿½ft, was fï¿½r einen Collider ein RayCast zur Maus berï¿½hrt, und startet dann je nach selected den Bau eines bestimmten Gebï¿½udes
     void CheckRay()
     {
         RaycastHit hit;
@@ -53,7 +53,7 @@ public class Builder : MonoBehaviour
             Destroy(hit.collider.gameObject);
     }
 
-    //Erstellt ein Fabrik-GameObject in der richtigen Position und Größe, sowie mit den richtigen Komponenten
+    //Erstellt ein Fabrik-GameObject in der richtigen Position und Grï¿½ï¿½e, sowie mit den richtigen Komponenten
     void ConstructFactory(RaycastHit hit)
     {
         GameObject g = Instantiate(defaultBuildings[selected - '0']);
@@ -70,7 +70,7 @@ public class Builder : MonoBehaviour
         g.GetComponent<Factory>().Init(selected - '0');
     }
 
-    //Erstellt ein Conveyor-GameObject in der richtigen Position und Größe und hängt ein ConveyorCheater-Skript dran
+    //Erstellt ein Conveyor-GameObject in der richtigen Position und Grï¿½ï¿½e und hï¿½ngt ein ConveyorCheater-Skript dran
     void DrawConveyor(Conveyor c)
     {
         GameObject g = Instantiate(defaultBuildings[0]);
@@ -90,7 +90,7 @@ public class Builder : MonoBehaviour
         g.name = "Conveyor";
     }
 
-    //Coroutine, welche überprüft, welcher Conveyor-Fall vorliegt und DrawConveyor() mit dem richtigen Conveyor-Skript startet
+    //Coroutine, welche ï¿½berprï¿½ft, welcher Conveyor-Fall vorliegt und DrawConveyor() mit dem richtigen Conveyor-Skript startet
     private IEnumerator ConstructConveyor(RaycastHit hit1)
     {
         while (true)
@@ -129,7 +129,7 @@ public class Builder : MonoBehaviour
 
                 if (isOut)
                 {
-                    c = new Conveyor(/*speed*/ 10, v1, hit2.point + new Vector3(0, 1, 0), f1, false); //Achtung: Möglicherweise wurden hier input und output vertauscht
+                    c = new Conveyor(/*speed*/ 10, v1, hit2.point + new Vector3(0, 1, 0), f1, false); //Achtung: Mï¿½glicherweise wurden hier input und output vertauscht
                 }
                 else
                 {
@@ -140,7 +140,7 @@ public class Builder : MonoBehaviour
             }
             else
             {
-                if (hit2.collider.gameObject.CompareTag("factory"))
+                if (hit2.collider.gameObject.CompareTag("Factory"))
                 {
                     Factory f2 = hit2.collider.gameObject.GetComponent<Factory>();
                     Vector3 v2 = f2.GetClosestAccess(hit2.point, out bool isOut);
@@ -168,7 +168,7 @@ public class Builder : MonoBehaviour
         CheckSelection();
     }
 
-    //Umständlicher "temporärer" Code, um aus einem Tastatur-Event den char für selected zu wählen
+    //Umstï¿½ndlicher "temporï¿½rer" Code, um aus einem Tastatur-Event den char fï¿½r selected zu wï¿½hlen
     void CheckSelection()  // highly inefficient upon expansion
     {
         Event e = Event.current;
