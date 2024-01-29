@@ -186,7 +186,6 @@ public class PlanetGenerator : MonoBehaviour {
     }
 
     private void UpdateLoadedFaces() {
-        Debug.Log(chunkHandler.GetLoadedChunks().Count);
         foreach (Chunk chunk in chunkHandler.GetLoadedChunks()) {
             cubeSphere.GenerateFace(chunk.Index);
         }
