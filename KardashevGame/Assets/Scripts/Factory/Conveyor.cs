@@ -118,7 +118,7 @@ public class Conveyor
                     {
                         int temp = Mathf.Min(output.outputGoodsFill[i], input.FACTORYCAPACITY - input.inputGoodsFill[j]);
                         input.AddGoods(input.inputGoods[j], input.inputGoodsFill, j, temp, good); //Hier könnte man Conveyorspeed einbauen
-                        output.SubtractGoods(output.outputGoods[i], output.outputGoodsFill, temp, 1); // *
+                        output.SubtractGoods(output.outputGoods[i], output.outputGoodsFill, i, temp); // *
                     }
                 }
             }

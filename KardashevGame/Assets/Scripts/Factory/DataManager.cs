@@ -8,12 +8,13 @@ public static class DataManager
     static readonly TextAsset G = (TextAsset) Resources.Load("Data/Goods");
     static readonly TextAsset B = (TextAsset) Resources.Load("Data/Buildings");
 
+    static readonly string ROWSEPARATOR = "   ";
+    static readonly string COLOUMNSEPARATOR = "  ";
+
     static readonly string[] recipes = R.text.Split(ROWSEPARATOR);
     static readonly string[] goods = G.text.Split(ROWSEPARATOR);
     static readonly string[] buildings = B.text.Split(ROWSEPARATOR);
 
-    static readonly string ROWSEPARATOR = "   ";
-    static readonly string COLOUMNSEPARATOR = "  ";
     public static readonly int NULLINDEX = -1;
     public static readonly Vector3 NULLVECTOR = Vector3.negativeInfinity;
 

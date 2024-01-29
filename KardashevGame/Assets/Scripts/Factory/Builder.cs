@@ -41,7 +41,7 @@ public class Builder : MonoBehaviour
 
         if (hit.collider.gameObject.CompareTag("Ground") || selected == '0')
         {
-            if (selected != 0) { 
+            if (selected != '0') { 
                 ConstructFactory(hit);
             } else
             {
@@ -64,7 +64,7 @@ public class Builder : MonoBehaviour
         g.tag = "Factory";
 
         g.transform.position = hit.point + new Vector3(0, 0, 0);
-        g.transform.localScale = new Vector3(1, 1, 1) / 3;
+        g.transform.localScale = new Vector3(1, 1, 1) / 5;
         g.transform.Rotate(new Vector3(90, transform.rotation.eulerAngles.y, 0));
 
         g.GetComponent<Factory>().Init(selected - '0');
@@ -107,12 +107,12 @@ public class Builder : MonoBehaviour
 
 
             Conveyor c;
-            if (hit1.collider.gameObject.CompareTag("factory"))
+            if (hit1.collider.gameObject.CompareTag("Factory"))
             {
                 Factory f1 = hit1.collider.gameObject.GetComponent<Factory>();
                 Vector3 v1 = f1.GetClosestAccess(hit1.point, out bool isOut);
 
-                if (hit2.collider.gameObject.CompareTag("factory"))
+                if (hit2.collider.gameObject.CompareTag("Factory"))
                 {
                     Factory f2 = hit2.collider.gameObject.GetComponent<Factory>();
                     if (isOut)
@@ -176,7 +176,7 @@ public class Builder : MonoBehaviour
             return;
         Debug.Log("here");
         Debug.Log(e.character + " " + selected);
-        if (e.character == 'i')
+        /*if (e.character == 'i')
         {
             inventory.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = new Vector4(200, 100, 100, 255);
             if(selected == 'f')
@@ -211,7 +211,7 @@ public class Builder : MonoBehaviour
             {
                 inventory.transform.GetChild(0).GetChild(selected - '0' + 1).GetComponent<Image>().color = new Vector4(200, 100, 100, 255);
             }
-        }
+        }*/
 
         selected = e.character;
         return;

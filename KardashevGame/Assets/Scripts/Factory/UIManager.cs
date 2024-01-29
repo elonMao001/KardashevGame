@@ -105,6 +105,7 @@ public class UIManager : MonoBehaviour
         if (origPanel == null)
             return;
 
+        origPanel.GetComponent<RectTransform>().localPosition = Vector3.zero;
         origPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(-135 * x, (images.Length - 1) * 50, 0);
         origPanel.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Goods Sprites/" + images[0]);
         origPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = names[0];
@@ -113,6 +114,7 @@ public class UIManager : MonoBehaviour
         {
             GameObject newPanel = Instantiate(origPanel);
             newPanel.transform.SetParent(UI.transform.GetChild(0));
+            newPanel.GetComponent<RectTransform>().localPosition = Vector3.zero;
             newPanel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             newPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(-135 * x, (images.Length - 1) * 50 - 100 * i, 0);
             newPanel.GetComponent<RectTransform>().localEulerAngles = new Vector3(0, 0, 0);
@@ -130,6 +132,7 @@ public class UIManager : MonoBehaviour
         int[] possibleRecipes = DataManager.GetRecipesForFactory(factory.GetComponent<Factory>().me);
         GameObject UI = Instantiate(selectRecipeUI);
         GameObject origPanel = UI.transform.GetChild(0).GetChild(0).gameObject;
+        origPanel.GetComponent<RectTransform>().localPosition = Vector3.zero;
         origPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(130, -100, 0);
         origPanel.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Goods Sprites/" + DataManager.GetNOutputImage(possibleRecipes[0], 0));
         origPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = DataManager.GetRecipeName(possibleRecipes[0]);
@@ -138,8 +141,9 @@ public class UIManager : MonoBehaviour
         {
             GameObject newPanel = Instantiate(origPanel);
             newPanel.transform.SetParent(UI.transform.GetChild(0));
+            newPanel.GetComponent<RectTransform>().localPosition = Vector3.zero;
             newPanel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            newPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(130 + 225 * (i/4), -100 - i * 80 + 400 * (i/4), 0);
+            newPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(130 + 225 * (i/5), -100 - i * 80 + 400 * (i/5), 0);
             newPanel.GetComponent<RectTransform>().localEulerAngles = new Vector3(0, 0, 0);
             newPanel.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Goods Sprites/" + DataManager.GetNOutputImage(possibleRecipes[i], 0));
             newPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = DataManager.GetRecipeName(possibleRecipes[i]);
@@ -155,6 +159,11 @@ public class UIManager : MonoBehaviour
 
     void UpdateProgressAndCounts()
     {
+        if (openendUI.name == "SelectRecipeUI(Clone)")
+        {
+            return;
+        }
+
         Factory factory = openedFactory.GetComponent<Factory>();
         Recipe recipe = factory.GetRecipe();
         if (recipe == null)
