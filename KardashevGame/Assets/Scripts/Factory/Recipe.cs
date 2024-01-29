@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Die Klasse Recipe dient als anschaulichere Zusammenfassung eines Rezeptes im Vergleich zum DataManager
+//Außederm verhindert sie redundante und möglicherweise aufwendige Aufrufe der DataManager-Methoden
 public class Recipe
 {
     public int[] inputIDs;

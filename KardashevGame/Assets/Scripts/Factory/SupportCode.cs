@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Diese Klasse wird benötigt um eine Coroutine nur dann weiterlaufen zu lassen, wenn es zu einem weiteren Mausklick kommt
 public class WaitForNextMouseClick : CustomYieldInstruction
 {
     public override bool keepWaiting
@@ -15,8 +16,11 @@ public class WaitForNextMouseClick : CustomYieldInstruction
     public WaitForNextMouseClick(){}
 }
 
+//Die Support-Klasse bietet ein paar allgemeine Methoden, die sich momentan alle mit Arrays beschäftigen
+//Ansonsten kommen hier zum Beispiel komplexe und öfter benötigte mathematische Terme und Co. rein
 public static class Support
 {
+    //Macht aus dem int[] array ein kleineres int[], in dem alle Werte nullInt (oft -1) entfernt wurden
     public static int[] ResizeArray(int[] array, int nullInt)
     {
         int size = ArrayFill(array, nullInt);
@@ -37,6 +41,7 @@ public static class Support
         return ret;
     }
 
+    //Überprüft, wieviele Werte von array nicht nullInt entsprechen
     public static int ArrayFill(int[] array, int nullInt)
     {
         int size = 0;
@@ -48,6 +53,7 @@ public static class Support
         return size;
     }
 
+    //Macht aus dem Good[] array ein kleineres Good[], in dem alle Werte nullGood (oft null) entfernt wurden
     public static Good[] ResizeArray(Good[] array, Good nullGood)
     {
         int size = ArrayFill(array, nullGood);
@@ -68,6 +74,7 @@ public static class Support
         return ret;
     }
 
+    //Überprüft, wieviele Werte von array nicht nullGood entsprechen
     public static int ArrayFill(Good[] array, Good nullGood)
     {
         int size = 0;
@@ -79,6 +86,7 @@ public static class Support
         return size;
     }
 
+    //Überprüft, ob der char test in array vorkommt
     public static bool ArrayContains(char[] array, char test)
     {
         foreach (char c in array)
