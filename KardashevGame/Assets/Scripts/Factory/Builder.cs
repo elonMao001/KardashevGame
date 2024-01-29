@@ -931,7 +931,7 @@ public class Builder : MonoBehaviour
         {
             selected = 8;
         } else
-        if (Input.GetKeyDown(KeyCode.Alpha9))
+        if (Input.GetKeyDown(KeyCode.Alpha9)
             selected = 9;*/
     }
 }
