@@ -35,10 +35,11 @@ public class Conveyor
         inputPos = start;
         outputPos = end;
 
-        Vector3 sToE = end - start;
-        for (int i = 0; i < length; i++) {
+        /*Vector3 sToE = end - start;
+        for (int i = 0; i < length; i++)
+        {
             segments[0] = start + i * sToE;
-        }
+        }*/
     }
 
     //Zweiter Fall: Das Conveyor geht von einem Punkt auf dem Boden zu einer Fabrik (momentan sinnlos)
@@ -52,11 +53,11 @@ public class Conveyor
         inputPos = start;
         outputPos = end;
 
-        Vector3 sToE = end - start;
+        /*Vector3 sToE = end - start;
         for (int i = 0; i < length; i++)
         {
             segments[0] = start + i * sToE;
-        }
+        }*/
 
         if (input)
         {
@@ -78,11 +79,11 @@ public class Conveyor
         inputPos = start;
         outputPos = end;
 
-        Vector3 sToE = end - start;
+        /*Vector3 sToE = end - start;
         for (int i = 0; i < length; i++)
         {
             segments[0] = start + i * sToE;
-        }
+        }*/
 
         this.input = input;
         this.output = output;
