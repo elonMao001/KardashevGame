@@ -6,5 +6,6 @@ using UnityEngine;
 namespace PlanetGeneration.TerrainGeneration {
     public interface ITerrainFilter {
         public float GetAmplitude(Vector3 position);
+        public Vector2 ApproximateMinMax();
     }
 }

@@ -72,6 +72,16 @@ namespace PlanetGeneration.TerrainGeneration {
             return pointOnUnitSphere * amplitude;
         }
 
+        public Vector2 ApproximateMinMax() {
+            Vector2 minmax = Vector2.zero;
+
+            for (int i = 0; i < terrainBundles.Length; i++) {
+                minmax += terrainBundles[i].terrainFilter.ApproximateMinMax();
+            }
+
+            return minmax;
+        }
+
         public class TerrainBundle {
             public ITerrainFilter terrainFilter, mask;
 

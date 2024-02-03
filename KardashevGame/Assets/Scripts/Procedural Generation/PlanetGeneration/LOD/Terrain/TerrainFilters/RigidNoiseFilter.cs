@@ -30,5 +30,9 @@ namespace PlanetGeneration.TerrainGeneration {
             amplitude = amplitude - rigidNoiseSettings.sealevel;
             return amplitude;
         }
+
+        public Vector2 ApproximateMinMax() {
+            return Vector2.zero;
+        }
     }
 }

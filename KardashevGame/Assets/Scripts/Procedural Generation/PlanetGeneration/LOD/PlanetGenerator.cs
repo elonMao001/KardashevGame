@@ -183,6 +183,9 @@ public class PlanetGenerator : MonoBehaviour {
         UpdateLoadedFaces();
         colorGenerator.UpdatePlanetRadius(shapeSettings.radius);
         colorGenerator.UpdateElevationMinMax(terrainGenerator.minmax);
+
+        Debug.Log(terrainGenerator.minmax.min + ", " + terrainGenerator.minmax.max + " | " +
+                  terrainGenerator.ApproximateMinMax());
     }
 
     private void UpdateLoadedFaces() {

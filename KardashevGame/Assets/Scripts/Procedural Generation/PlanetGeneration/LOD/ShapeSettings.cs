@@ -17,8 +17,6 @@ namespace PlanetGeneration {
         public TerrainLayer[] terrainLayers;
         public TerrainLayer baseLayer, layer01, layer02, layer03;
 
-        public ReorderableList reorderableList;
-
         public void Init() {
             terrainLayers = new TerrainLayer[] {
                 baseLayer, layer01, layer02, layer03

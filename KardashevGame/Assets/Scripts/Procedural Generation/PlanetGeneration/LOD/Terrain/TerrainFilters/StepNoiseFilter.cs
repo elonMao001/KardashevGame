@@ -27,5 +27,9 @@ namespace PlanetGeneration.TerrainGeneration {
             
             return amplitude - stepNoiseSettings.sealevel;
         }
+
+        public Vector2 ApproximateMinMax() {
+            return Vector2.zero;
+        }
     }
 }
